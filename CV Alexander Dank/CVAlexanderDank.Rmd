@@ -67,6 +67,7 @@ cv_entries |>
   filter(type %in% c('werkervaring',"nevenwerkzaamheden")) |> 
   mutate(what = glue("<span class='cv-entry-title'>{what}</span>, {institution}")) |> 
   select(year, what) |> 
+  arrange(desc(year)) |>
   kable()
 ```
 
@@ -100,7 +101,7 @@ p
 ```
 
 * <img src="https://www.pngkey.com/png/full/139-1398300_r-shiny-logo.png"  width="10%" height="10%"> [<span style="color: blue">Shiny web app development voorbeeld</span>](https://foodmicrobiologywur.shinyapps.io/Hazards_shiny/)
-* <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png"  width="10%" height="10%"> [<span style="color: blue">Code voorbeelden</span>](https://github.com/alexanderdank)
+* <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png"  width="10%" height="10%"> [<span style="color: blue">Code voorbeelden</span>](https://github.com/alexanderdank/RvIG_sollicitatie)
 * <img src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/hq30ze9287y9ztkmcdhy"  width="10%" height="3%"> [<span style="color: blue">Lijst van gevolgde cursussen</span>](https://docs.google.com/spreadsheets/d/e/2PACX-1vRPu82jrnjNelp5ULiIUjkNw7CdW9zowWb5H--ytSvSrbwEWk47HoAdDpCG3Pam9An62kh5uE8Xx73q/pubhtml)
 
 

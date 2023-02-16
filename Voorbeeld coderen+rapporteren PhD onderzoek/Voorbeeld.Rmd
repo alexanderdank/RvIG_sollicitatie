@@ -1,0 +1,1356 @@
+---
+output:
+  bookdown::pdf_document2:
+    template: [templates/brief_template.tex]
+    citation_package: biblatex
+    latex_engine: lualatex
+    extra_dependencies: ["float"]
+  bookdown::html_document2: default
+  bookdown::word_document2: default
+documentclass: book
+bibliography: [bibliography/miso.bib]
+params:
+  out_width: 99%
+  printvers: FALSE
+---
+
+```{r emp6, eval=params$printvers, echo=FALSE, results='asis'}
+cat(" \\clearpage\\null\\thispagestyle{empty}")
+cat(" \\clearpage\\null\\thispagestyle{empty}")
+cat(" \\ChapFrame")
+  
+``` 
+
+
+
+```{=latex}
+\chapter[Cross-over fermentations and their potential in product development]{Cross-over fermentations and their potential in product development}
+\label{cha:crossover}
+\vspace*{\fill}
+A. Dank (2022)
+\\
+\\
+This chapter consists of two case studies.
+\\
+\\
+The dairy miso case study is published as:
+\\
+% Full citation of the published (or submitted/in review) article
+% This refers to the article key in the refs.bib file.
+\preto\fullcite{\AtNextCite{\defcounter{maxnames}{99}}}
+\fullcite{dank2021cross}
+\\
+\\
+Manuscript in preparation for lupin quark case study:
+\\
+T. Canoy, J. Zwinkels, J. Wolkers-Rooijackers, A. Dank, J. van Wiggen, T. Abee, E.J. Smid (2022)
+\newpage
+```
+
+\chaptermark{Cross-over fermentations}
+```{r global_options, setup, include=FALSE}
+#knitr::opts_chunk$set(fig.pos = 'H')
+## Set working directory to your file locations
+knitr::opts_knit$set(root.dir = dirname(rstudioapi::getActiveDocumentContext()$path))
+
+getwd()
+```
+## Abstract {-}
+
+Cross-over fermentations are processes in which a microorganism from one traditional fermentation process is introduced onto a new substrate and/or to a new microbial partner. When designed correctly, these novel combinations can result in fermented food products with enhanced product characteristics, such as enhanced nutritional value or aroma/flavor development. Here, we discuss two examples of cross-over fermentations and show the benefits of applying this new concept in novel product development. The first example covers the production of lupin quark using two lactic acid bacteria and \textit{in situ} biofortification of this lupin quark by fermentation of \textit{Propionibacterium freudenreichii}. \textit{P. freudenreichii} was able to ferment lupin milk in mono and in co-cultures, whilst producing ~3 $\mu$g of B~12~ per 100 gram of product. The second example covers the development of a novel food product called dairy miso, produced by fermenting quark with \textit{Aspergillus oryzae}, resulting in a food product rich in aroma. These examples show the power of cross-over fermentations in novel product development or enhancement of product characteristics. The enormous diversity of microorganisms used in traditional fermentation processes and the vast number of alternative substrates offer numerous opportunities for the development of novel fermented products.
+
+```{=latex}
+\newpage
+```
+
+## Introduction {-}
+
+Many classical food products in the world, like bread, cheese, wine, yoghurt, olives, vinegar, beer, tea, tempeh, soy sauce and many more are fermented [@cit96]. Fermentation is ubiquitously present in all cultures, which all use their own raw materials and microbiological workhorses to convert it to the often so-typical products belonging to that culture. The periodic table of fermented foods by @gaenzle2015lactic nicely shows this large variety of food fermentations carried out across the globe. Although food fermentations have been around for centuries, the role of microbial life in fermentation was not known until the discovery of fermentation by Louis Pasteur [@bordenave2003louis]. Research regarding fermentations led to the isolation of dominant species of bacteria and yeasts present in these fermentations and ultimately to the use of single strain or mixed-culture defined starter cultures to start the fermentation process. The use of defined starter cultures led to better product quality control and higher product consistency [@ross2002preservation]. 
+However, a clear drawback of using single strain defined starters is the loss of microbial diversity in fermented foods and restriction of production of (beneficial) end-products limited to the metabolic repertoire of the used starter. Potentially, the industrialisation of artisanal fermentation processes thus decreases food functionality. This is exemplified by the fact that vitamin B~12~ presence in tempeh can be attributed to the presence of a (harmful) contaminant microbe and is thus not associated with the starter mold [@areekul1990source]. The use of good-manufacturing practices and starter cultures thus improves food safety, but potentially decreases food functionality. This hurdle could be overcome by replacing the contaminant bacteria with a safe alternative that also produces the beneficial compound, such as microorganisms with historical evidence of safe usage, the so-called GRAS (generally recognised as safe) status. Valuable sources of beneficial microorganisms might be other, distinctly different, fermented food products.
+The introduction of a microorganism from a traditional fermentation process to novel substrates and/or to a new fermentation partner is what we coined “cross-over fermentations” [@dank2021cross]. Considering the large metabolic diversity found in artisanal fermented foods, there is a large potential for novel fermented food product development and fermented food product enhancements that needs to be explored. 
+
+In this chapter we aim to show the potential of cross-over fermentations by showing two examples of such fermentations. In the first example, cross-over fermentation is used to nutritionally enhance a previously in-house designed plant-based fermented food [@canoylupin]. \textit{Propionibacterium freudenreichii}, normally used in Swiss-type cheese fermentations, is applied to a plant-based product to enhance the B~12~ content. In the second example cross-over fermentation is used to develop a novel food product with interesting organoleptic properties. \textit{Aspergillus oryzae} is used on a dairy substrate to create a novel fermented dairy product with rich aromatic properties. A discussion on the benefits and drawbacks of the utilization of single-strain or multi-strain defined starter cultures is given to put the potential of cross-over fermentations into perspective.
+
+## Enhancing nutritional quality of fermented foods by cross-over fermentation: The lupin quark case study {-}
+Due to increasing world population numbers, consequent increased use of agricultural land and natural resources and increased carbon emissions the need for more sustainable dietary patterns is emerging. A large contributor to global greenhouse gas emissions is meat production [@steinfeld2006livestock]. Reducing global meat production thus could contribute significantly to reducing global greenhouse gas emissions. However, plant-based foods and dietary patterns are associated with a reduced uptake of several important micro nutrients, such as vitamin B~12~ [@neufingerl2021nutrient]. One way to combat this, is to fortify plant-based foods by fermentation with producers of beneficial compounds. Vitamin B~12~ is produced \textit{de novo} by prokaryotes, such as \textit{Propionibacterium freudenreichii} [@deptula2015blub]. Below we show an example of the development of a B~12~ fortified plant-based quark, made with lupin beans. A combination of \textit{Lactococcus cremoris} and \textit{Lactobacillus plantarum} was used to produce the initial lupin quark product, as designed previously in our laboratory [@canoylupin]. Here we assayed whether \textit{P. freudenreichii} could be used to fortify this product with vitamin B~12~.  Important parameters such as acidification, metabolite production, population dynamics and vitamin B~12~ content were monitored.
+
+### Mono and co-cultures of \textit{P. freudenreichii} are able to ferment lupin milk into quark  {-}
+Lupin milk was inoculated with mono or co-cultures of \textit{P. freudenreichii, L. cremoris} and \textit{Lb. plantarum}, respectively and pH was monitored for a period of 4 days (see Figure \ref{fig:phlupin}). All bacteria were able to acidify lupin milk. Amongst the mono-cultures, \textit{Lb. plantarum} showed fastest acidification (pH 4.7$\pm$ 0.03 after 24h) which remained stable until the end of the fermentation. Both \textit{P. freudenreichii} and \textit{L. cremoris} showed slower acidification after 24h (pH 5.9$\pm$ 0.06 and 5.8$\pm$ 0.04 respectively) and had higher pH at day 4 (pH 5.2$\pm$ 0.3 and pH 5.1$\pm$ 0.1 respectively). Co-culture of \textit{L. cremoris} and \textit{Lb. plantarum} showed similar trends as mono-culture of \textit{Lb. plantarum} reaching similar final pH (4.6$\pm$ 0.05). Interestingly, all co-cultures containing \textit{P. freudenreichii} reached a final pH between 5.1 and 5.4, which was significantly higher compared to mono-cultures of lupin milk fermented with \textit{Lb. plantarum} and co-cultures containing \textit{Lb. plantarum} (Tukey HSD, p<0.05).  This is likely due to consumption of lactate and release of less acidic organic acids acetate and propionate into the lupin milk. Lactate has a pKa value of 3.86, propionate and acetate have a pKa value of 4.75 and 4.76 respectively, meaning lactate is 10x more acidic than propionate and acetate and consumption of lactate and full conversion of propionate to acetate would increase pH by 1 point respectively (disregarding potential differences in release of other components affecting pH such as NH~3~).
+The slower acidification rate and higher final pH obtained with \textit{P. freudenreichii} may have implications for product stability and safety. 
+
+```{r phlupin, echo=FALSE, message=FALSE, warning=FALSE, fig.margin=TRUE, fig.cap = "Acidification profiles of lupin quark.", out.width=params$out_width}
+### packages
+library(readxl)
+library(envalysis)
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+library(stringr)
+library(plyr)
+detach("package:plyr", unload=TRUE)
+
+### this R file contains the complete analysis of the data generated by Joost van Wiggen on
+## the lupin quark project
+
+## data was taken from raw data files and combined into one data frame
+## This dataframe was correspondingly used for the following analysis 
+## NOTE: Any changes in the raw data files would thus require a new action in the "combing data.R" 
+## script belonging to this folder. 
+
+## first load the data
+df_all <- read_xlsx("Data_example/data_summary.xlsx")
+
+## we will also define a plot theme
+theme <- theme_publish()
+
+
+### in this file we will make subsections of the data to generate corresponding plots. 
+## All section will have an R header so it is known to the reader which section is being handled
+## for later use we will first add the research name to all the data obtained by Joost
+
+df_all$Researcher <- "Joost"
+
+## we also define a character vector with usefull columns for later use
+selecvec <- c("Name","Replicate","Timepoint")
+
+# define a rename factor for renaming the abbreviations used in the excel
+
+
+################ pH section ##################
+df_ph <- df_all %>%
+  select(all_of(selecvec), pH)
+
+library("stringr") 
+
+
+## define order of grid panels
+order <- c("LL","TMW","LL+TMW","PF","PF+LL","PF+TMW","PF+TMW+LL")
+
+
+df_ph <- dplyr::arrange(transform(df_ph, Name=factor(Name,levels=order),Name))
+
+
+labs <- c("PF+TMW+LL" = "P. freudenreichii & \n L. cremoris & \n Lb. plantarum", "LL" = "L. cremoris","LL+TMW" = "L. cremoris & \n Lb. plantarum",
+          "PF" = "P. freudenreichii", "PF+TMW" = "P. freudenreichii & \n Lb. plantarum", "PF+LL" = "P. freudenreichii & \n L. cremoris",
+          "TMW" = "Lb. plantarum") 
+labelled_facet <- facet_wrap(~Name, labeller = labeller(Name=labs), nrow=2)
+# New facet label names for dose variable
+
+plot_pH <- df_ph %>%
+  group_by(Name, Timepoint) %>% ## group by sample name and timepoint
+  mutate(mean_pH=mean(pH), sd_pH=sd(pH)) %>%  ## take the average of the specific timepoint of all values within that name and take standard deviation
+  ggplot(aes(x=Timepoint, y=mean_pH)) + ## make a plot with timepoint on x axis and pH on y
+  geom_point() + ## add dots outpit
+  geom_line() + ## connect dots with lines
+  geom_errorbar(aes(ymin=mean_pH-sd_pH, ymax=mean_pH+sd_pH)) + ## add errorbars
+  #facet_grid(~Name) +## make  plot grid based on name variable
+  theme_publish() + ## add a scientific theme based on envalysis package
+  ylab("pH") + xlab("Time in hours") + ## Add better labeling to the plot 
+  labelled_facet +
+  theme(strip.text.x = element_text(angle=0, size=10, face="italic", vjust=0.2))
+plot_pH
+```
+
+```{r phmin values, warning=FALSE, include=FALSE, eval=FALSE}
+df_ph <- df_all %>%
+  select(all_of(selecvec), pH)
+df_ph_min <- df_ph %>%
+  group_by(Name, Timepoint) %>% ## group by sample name and timepoint
+  mutate(mean_pH=mean(pH), sd_pH=sd(pH)) %>% ungroup() %>% filter(Timepoint == max(Timepoint)) %>% filter(Replicate == 1) %>%
+  print(mean_pH)
+
+
+df_ph_day1 <- df_ph %>%
+  group_by(Name, Timepoint) %>% ## group by sample name and timepoint
+  mutate(mean_pH=mean(pH), sd_pH=sd(pH)) %>% ungroup() %>% filter(Timepoint == 24) %>% filter(Replicate == 1) %>%
+  print(mean_pH)
+
+
+## anove endpoint
+df_ph_anova <- df_ph %>% filter(Timepoint == max(Timepoint))
+
+ANOVA_endpH <- aov(pH ~ Name, data = df_ph_anova)
+
+summary(ANOVA_endpH)
+
+## tukey's test
+tukey_endpH<-TukeyHSD(ANOVA_endpH)
+
+tukey_endpH
+
+```
+
+
+### Carbohydrate consumption and organic acid profiles of lupin quark {-}
+We measured the initial content of several carbohydrates in lupin milk; galactose (1.7 mM), glucose (0.7 mM), fructose (0.3 mM), sucrose (2.1 mM) and raffinose (0.4 mM) were quantified. These carbohydrates may act as primary carbon sources for \textit{L. cremoris, Lb. plantarum} and \textit{P. freudenreichii}. \textit{L. lactis} is able to utilize fructose, galactose, glucose and sucrose, but is not able to utilize raffinose [@canoylupin]. \textit{Lb. plantarum} is able to utilize fructose, galactose, glucose, raffinose and sucrose [@canoylupin]. \textit{P. freudenreichii} is able to utilize fructose, galactose and glucose [@borghei2021genome], but is not able to utilize sucrose and raffinose [@tarnaud2020differential]. Our results support these claims, as we found all three bacteria to consume fructose, galactose and glucose, whilst raffinose utilization was not apparent for any of the bacteria (data not shown) and sucrose only for the LAB. Hence, competition between these carbon sources in co-cultures is conceivable (discussed below).
+
+```{r HPAEC, include = FALSE}
+df_hpaec <- read_xlsx("Data_example/JOOSTAA_old.xlsx", sheet="HPAEC(mM)")
+
+#calc initial measured contents
+hpaec_plot_singles <- df_hpaec  %>% gather(arabinose, galactose, glucose, fructose, sucrose, raffinose, stachyose, verbascose, value = "mM", key = "compound") %>%
+  filter(!is.na(mM),
+         Sample %in% c("LL", "PF", "TMW")) %>%
+  group_by(Sample, Timepoint, compound) %>%
+  mutate(mean_mM = mean(mM),
+         sd_mM = sd(mM)) %>%
+  ggplot(aes(x=Timepoint, y=mean_mM)) + geom_point() + geom_line()+
+  geom_errorbar(aes(x=Timepoint, ymin=mean_mM-sd_mM, ymax=mean_mM+sd_mM)) +
+  facet_grid(compound~Sample, scales= "free_y")
+
+
+'%nin%' <- Negate('%in%')
+hpaec_plot_cocultures <- df_hpaec  %>% gather(arabinose, galactose, glucose, fructose, sucrose, raffinose, stachyose, verbascose, value = "mM", key = "compound") %>%
+  filter(!is.na(mM),
+         Sample %nin% c("LL", "PF", "TMW")) %>%
+  group_by(Sample, Timepoint, compound) %>%
+  mutate(mean_mM = mean(mM),
+         sd_mM = sd(mM)) %>%
+  ggplot(aes(x=Timepoint, y=mean_mM)) + geom_point() + geom_line()+
+  geom_errorbar(aes(x=Timepoint, ymin=mean_mM-sd_mM, ymax=mean_mM+sd_mM)) +
+  facet_grid(compound~Sample, scales= "free_y")
+
+
+### calculate t=0's for all sugars
+df_end <- df_hpaec  %>% gather(arabinose, galactose, glucose, fructose, sucrose, raffinose, stachyose, verbascose, value = "mM", key = "compound") %>%
+  mutate_if(is.numeric, ~replace_na(., 0)) %>%
+  filter(Sample %nin% c("LL", "PF", "TMW"),
+         Timepoint == 0) %>%
+  group_by(Timepoint, compound) %>%
+  mutate(mean_mM = mean(mM),
+         sd_mM = sd(mM))
+comps <- unique(df_end$compound)
+mean_mM <- unique(df_end$mean_mM)
+start<- rbind(comps, mean_mM)
+
+```
+
+```{r acidslupin, out.width=params$out_width, echo=FALSE, message=FALSE, warning=FALSE, fig.margin=TRUE, fig.cap = "Organic acids and ethanol formation in lupin quark.", fig.width=7, fig.height=6}
+## make a plot with organic acid data averages
+df_hplc <- df_all %>% 
+  select(all_of(selecvec), Succinate, lactate, acetate, propionate, ethanol.x)
+## make all columns uppercase, that is easier...
+names(df_hplc) <- str_to_title(names(df_hplc))
+df_hplc <- dplyr::rename(df_hplc, Ethanol = Ethanol.x)
+
+
+
+## define order of grid panels
+order <- c("LL","TMW","LL+TMW","PF","PF+LL","PF+TMW","PF+TMW+LL")
+#make tidy
+df_hplc_tidy <- df_hplc %>% 
+  gather(Propionate, Acetate, Succinate, Lactate, Ethanol, key="Compound",value="mM") %>% ## gather the organic acid data in 1 column
+  group_by(Name, Timepoint, Compound) %>%
+  mutate(mean_mM=mean(mM), sd_mM=sd(mM)) 
+#transform NAs to zeros
+df_hplc_tidy$mM[is.na(df_hplc_tidy$mM)] <- 0
+
+df_hplc_tidy <- dplyr::arrange(transform(df_hplc_tidy, Name=factor(Name,levels=order),Name))
+
+
+
+labelled_facet <- facet_grid(Compound~Name, labeller = labeller(Name=labs), scales ="free_y")## Add better labeling to the plot
+
+## make a plot of organic acids
+plot_orgacids <- df_hplc_tidy %>% ## group by sample name and timepoint
+  ggplot(aes(x=Timepoint, y=mean_mM, col=Compound)) + ## make a plot with timepoint on x axis and pH on y
+  geom_point() + ## add dots outpit
+  geom_line() + ## connect dots with lines
+  geom_errorbar(aes(ymin=mean_mM-sd_mM, ymax=mean_mM+sd_mM)) + ## add errorbars
+ # facet_grid(Compound~Name, scales = "free_y") +## make  plot grid based on name variable
+  theme + ## add a scientific theme based on envalysis package
+  ylab("organic acid concentration (mM)") + xlab("Time in hours") +
+  labelled_facet +
+  theme(strip.text.x = element_text(angle=0, size=7, face="italic", vjust=0.2),
+        strip.text.y = element_text(angle=-90, size=9, vjust=-0.2),
+        axis.text.x = element_text(angle=90, hjust=1))
+
+plot_orgacids
+
+
+df_hplc_end <- df_hplc %>% filter (Timepoint == 96) %>% 
+  gather(Propionate, Acetate, Succinate, Lactate, Ethanol, key="Compound",value="mM") %>% ## gather the organic acid data in 1 column
+  group_by(Name, Timepoint, Compound) %>%
+  mutate(mean_mM=mean(mM), sd_mM=sd(mM)) 
+#transform NAs to zeros
+df_hplc_end$mM[is.na(df_hplc_end$mM)] <- 0
+df_hplc_endmean <- df_hplc_end %>% select(Name, Replicate, Timepoint, Compound, mean_mM) %>% spread(Compound, mean_mM)
+df_hplc_end_sd <- df_hplc_end %>% select(Name, Replicate, Timepoint, Compound, sd_mM) %>% spread(Compound, sd_mM)
+```
+
+
+Fermentation of fermentable carbon sources in lupin milk resulted in the production of organic acids and ethanol (see Figure \ref{fig:acidslupin}).
+All species produced acetate and succinate in mono-culture. Both \textit{L. cremoris} and \textit{Lb. plantarum} produced lactate in mono-culture, whereas ethanol was only produced by \textit{L. cremoris} and propionate by \textit{P. freudenreichii} in mono-culture. Interestingly, when \textit{L. cremoris} was growing in co-cultures ethanol could not be detected anymore. Furthermore, when assuming cumulative production of lactate and acetate by \textit{L. cremoris} and \textit{Lb. plantarum} in co-culture, higher end-values of these compounds are expected based on the production of these compounds in mono-culture. This indicates there is competition between \textit{Lb. plantarum} and \textit{L. cremoris} for the same carbon sources. Interestingly, in co-cultures containing \textit{P. freudenreichii} lactate was hardly detected, indicating \textit{P. freudenreichii} lactate consumption rate could keep up with the lactate production rate of both \textit{Lb. plantarum} anb \textit{L. cremoris}, except for the initial hours of incubation where minimal lactate presence is detected when \textit{Lb. plantarum} is present in the co-culture. Mono-cultures of \textit{Lb. plantarum} reached around 21 mM lactate after 4 days. Assuming a similar amount of lactate was produced in co-cultures with \textit{P. freudenreichii}, one would expect to find ~14 mM propionate and 7 mM acetate production by \textit{P. freudenreichii} assuming a 2:1 propionate:acetate ratio in anaerobic conditions from complete lactate consumption. We found a production of ~15 mM propionate and 13.7 mM acetate. When assuming \textit{Lb. plantarum} produced similar amounts of acetate in co-culture (8.7 mM), a total formation of 7 mM acetate by \textit{P. freudenreichii} is found. These values nicely match with expected propionate:acetate ratio of 2:1 and expected total formation based on the lactate produced by \textit{Lb. plantarum}. A similar trend for the co-culture with all three species is observed, although part of the expected formed lactate (~4 mM) cannot be accounted for. In co-cultures of \textit{P. freudenreichii} and \textit{L. cremoris} more propionate and acetate is formed than can be accounted for based on mono-cultures of \textit{L. cremoris} and no ethanol formation is observed by \textit{L. cremoris}, indicating at least partial competition for substrates between \textit{P. freudenreichii} and \textit{L. cremoris}. All in all these results do not indicate any negative effect of \textit{P. freudenreichii} on metabolite production by \textit{Lb. plantarum} and hence it is unlikely \textit{P. freudenreichii} competes for carbon sources with \textit{Lb. plantarum}. For interactions with \textit{L. cremoris} at least some indication for substrate competition exists. This could be due to slower and less lactate release by \textit{L. cremoris} compared to \textit{Lb. plantarum}, making \textit{P. freudenreichii} compete for sugars instead of relying mainly on lactate present in its enviroment (discussed below). It is plausible that, although being able to grow on and metabolize present sugars in lupin milk, \textit{P. freudenreichii} prefers lactate whenever it is present and does not compete with the lactate-producer in its microbial consortium when there is sufficient supply of lactate. This hypothesis is supported by the fact that indeed a preference of lactate over glucose is reported for \textit{P. freudenreichii} when both carbon sources are present [@lee1974diauxic].
+
+### Bacterial growth during lupin quark production {-}
+Lupin milk was found to support growth of all three bacteria in mono-culture (see Figure \ref{fig:bacgrowth}). \textit{P. freudenreichii} was able to ferment lupin milk by itself reaching cell densities  of $1.4*10^9$ cfu/mL, which was higher compared to \textit{L. cremoris} ($8.5*10^8$ cfu/mL) and \textit{Lb. plantarum} ($5.2*10^8$ cfu/mL).  In co-cultures, both LAB seem to compete with each other as after 24h in co-culture with \textit{L. cremoris}, \textit{Lb. plantarum} cell numbers dropped below detection limit used in our study ($10^6$) only to recover later and \textit{L. cremoris} cell numbers also decline to $3.7*10^8$ cfu/mL. Similarly, in combination with \textit{P. freudenreichii}, \textit{L. cremoris} was not detected at various time points indicating reduced growth. Interestingly, also \textit{P. freudenreichii} cell numbers declined to $7.5*10^8$ cfu/mL. 
+
+```{r bacgrowth, out.width=params$out_width, echo=FALSE, message=FALSE, warning=FALSE, fig.margin=TRUE, fig.cap = "Bacterial growth during lupin quark production"}
+
+# Create the plot
+## select only data for colony counts
+
+#df <- read_xlsx("D:/PhD backup/Work activity 1.1/Lupin Quark/Joost/Data/Excell_R_JOOST.xlsx", skip = 1)
+#df_counts <- df %>% select(Sample_ID, name, Plate, Replicate, Timepoint, colony_count5, colony_count6, colony_count7)
+
+## collect all counts in 1 column
+#df_counts <- df_counts %>% gather(colony_count5, colony_count6,colony_count7, key=Countpower, value=counts)
+
+## filter for correct counts
+#df_counts <- df_counts %>% filter(counts >100,
+                                  #counts < 5000)
+
+## calculate real concentration of counts
+#df_counts$counts <- ifelse(df_counts$Countpower == 'colony_count5', df_counts$counts*10^5, df_counts$counts*1)
+#df_counts$counts <-ifelse(df_counts$Countpower == 'colony_count6', df_counts$counts*10^6, df_counts$counts*1)
+#df_counts$counts <-ifelse(df_counts$Countpower == 'colony_count7', df_counts$counts*10^7, df_counts$counts*1)
+
+#library('xlsx')
+#write.xlsx(df_counts, "D:/PhD backup/Work activity 1.1/Lupin Quark/Joost/counts_R_calculated.xlsx")
+#counts_new <- read_excel('D:/PhD backup/Work activity 1.1/Lupin Quark/Joost/data/counts_R_calculated.xlsx', sheet=1)
+
+#count6 <- counts_new %>% filter(Countpower == 'colony_count6')
+#count5 <- counts_new %>% filter(Countpower == "colony_count5")
+#count7 <- counts_new %>% filter(Countpower == "colony_count7")
+## identify rows with both count5 and count6 
+#dupcounts56 <- inner_join(count5, count6, by = c("name","Plate","Replicate","Timepoint"))
+## identify with both count6 and count7
+#dupcounts67 <- inner_join(count6, count7, by = c("name","Plate","Replicate","Timepoint"))
+#dupcounts <- rbind(dupcounts56,dupcounts67)
+#dupcounts <- dupcounts %>% group_by(name,Plate,Replicate,Timepoint) %>% mutate(counts=(counts.x+counts.y)/2)
+
+#dupcounts <- dupcounts %>% select(name,Plate,Replicate,Timepoint, counts)
+## remove any rows from original df with counts 5 and 6 or 6 and 7
+#temp <- counts_new %>% anti_join(dupcounts56, by = c( "name","Plate","Timepoint","Replicate"))
+#temp <- temp %>% anti_join(dupcounts67, by = c( "name","Plate","Timepoint","Replicate"))
+## now whe have df with only unique values without duplicated rows, we can join with the dupcounts df
+#count_final <- full_join(dupcounts, temp)
+#count_final <- count_final %>% select(1:5)
+#write_csv(count_final, "D:/PhD backup/Work activity 1.1/Lupin Quark/Joost/data/counts_R_calculated_FINALlist.csv")
+
+
+#### Plate count section ##################
+df_counts <- read_csv("Data_example/counts_R_calculated_FINALlist.csv")
+  
+
+
+# make tidy to calculate mean and sd
+#df_counts_tidy <- df_counts %>% gather(4,5,6, key=counts, value= log10counts)
+
+### need to adjust to remove below detection limit values
+## replace NAs with 0 
+#df_counts_tidy$log10counts <- replace(df_counts_tidy$log10counts, 0, is.na(df_counts_tidy$log10counts))
+
+## filter out NAs
+#df_counts_tidy <- df_counts_tidy %>% filter(log10counts > 0.1)
+
+##identify which rows to remove because below detection limit
+#LL <- df_counts_tidy %>% filter(counts == "L.l.")
+##LTMW 24+72h
+#PFLL 24, 72,96
+#PFLL 24,48,72
+
+## define order of grid panels
+order <- c("LL","TMW","LL+TMW","PF","PF+LL","PF+TMW","PF+TMW+LL")
+
+## first calculate non-transformed
+#df_counts_tidy <- df_counts_tidy %>% mutate(counttotal = 10^log10counts)
+#df_counts_tidy <- df_counts_tidy %>% select(-log10counts)
+## make subset excluding single measurements (with at least one below detection limit)
+df_counts_sub <- df_counts %>% group_by(name, Timepoint,counts) %>% 
+  filter(n() < 2)
+
+df_counts_sub <- df_counts_sub %>% group_by(name,Timepoint, Plate) %>%
+  mutate(mean_count = mean(counts),
+         sd_count = sd(counts))
+df_counts_sub <- df_counts_sub %>% filter(!is.na(sd_count))
+
+df_counts_sub <- dplyr::arrange(transform(df_counts_sub, name=factor(name,levels=order),name))
+
+labs <- c("PF+TMW+LL" = "P. freudenreichii & \n L. cremoris & \n Lb. plantarum", "LL" = "L. cremoris","LL+TMW" = "L. cremoris & \n Lb. plantarum",
+          "PF" = "P. freudenreichii", "PF+TMW" = "P. freudenreichii & \n Lb. plantarum", "PF+LL" = "P. freudenreichii & \n L. cremoris",
+          "TMW" = "Lb. plantarum") 
+labelled_facet <- facet_wrap(~name, labeller = labeller(name=labs), nrow=2)
+
+
+## Make the final plot, mention below detection limit has been applied for L.L samples! detection limit = <3*10^6
+plot_counts <- df_counts_sub %>%
+ggplot(aes(x=Timepoint, y=mean_count, col=Plate)) + ## make a plot with timepoint on x axis and pH on y
+  geom_point() + ## add dots outpit
+  geom_line() + ## connect dots with lines
+  geom_errorbar(aes(ymin=mean_count-sd_count, ymax=mean_count+sd_count)) + ## add errorbars
+  labelled_facet +## make  plot grid based on name variable
+  theme_publish() + ## add a scientific theme based on envalysis package
+  ylab("Colony forming units (CFU/mL)") + xlab("Time in hours") +
+  theme(strip.text.x = element_text(angle=0, size=10, face="italic", vjust=0.2)) +
+  scale_color_discrete(labels = c(LL = expression(italic('L. cremoris')), PF = expression(italic('P. freudenreichii')), TMW = expression(italic('Lb. plantarum'))))## Add better labeling to the plot
+
+#library(scales)
+##extract end values
+#counts_end <- df_counts_sub %>% filter(Timepoint ==96) %>% select(name,Plate,mean_count,sd_count) %>% distinct()
+#function to get nice y-label with "10^" instead of "e+"
+#scientific_10 <- function(x) 
+#{ifelse(x==0, "0", parse(text=gsub("[+]", "", gsub("e", " %*% 10^", scientific_format()(x)))))
+#}
+#counts_end$mean_count <- scientific_10(counts_end$mean_count)
+
+plot_counts
+```
+
+The effects observed in co-culture between \textit{L. cremoris} and \textit{P. freudenreichii} or \textit{Lb. plantarum} are not evident in co-culture with all three bacteria. Therefore the most plausible explanation for the drop in cell numbers of \textit{P. freudenreichii} when grown solely together with \textit{L. cremoris} seems to be competition for substrates, as \textit{L. cremoris} is able to utilize the same carbon sources as \textit{P. freudenreichii}, but releases less and more slowly lactate to the lupin milk compared to \textit{Lb. plantarum}, in which co-cultures reduced \textit{P. freudenreichii} growth is not observed. This reduced release of lactate may trigger \textit{P. freudenreichii} to compete for carbon sources, as lactate release by \textit{L. cremoris} may be below \textit{P. freudenreichii} requirements. This hypothesis would be supported by the fact that at 6 hours no lactate can be detected in co-cultures of \textit{P. freudenreichii} and \textit{L. cremoris}, whereas in co-cultures with \textit{Lb. plantarum} a minimum lactate presence is detected (see Figure \ref{fig:acidslupin}). The release of lactate by \textit{Lb. plantarum} seems to increase growth rate of \textit{P. freudenreichii} compared to mono-cultures of \textit{P. freudenreichii}, as higher cell numbers are found after 1 day. Growth of \textit{Lb. plantarum} was not affected in co-culture with \textit{P. freudenreichii}, indicating indeed \textit{P. freudenreichii} did not compete for carbon sources with \textit{Lb. plantarum}. In general, \textit{P. freudenreichii} is applicable in co-cultures with \textit{Lb. plantarum}, whereas the combination with \textit{L. cremoris} in our study is less promising. It would be interesting to see if similar growth behavior of \textit{P. freudenreichii} and \textit{L. cremoris} occurs when a small amount of lactate is added (~10 mM) at the initial stages of fermentation, thereby elucidating whether our observations are a result of substrate competition between the two microbes.
+
+
+### Amino acid profiles of lupin quark {-}
+Amino acid content was determined during lupin quark fermentation for 18 amino acids. Notably, initial contents and amino acid profile developments were variable between samples, showing biological variability between different batches of lupin beans processed into milk and as a result differences during lupin milk fermentation. For each mono-culture it was determined whether amino acids were present in higher or lower amounts after 96 hours compared to 0 hours. It must be noted higher amino acids amounts can occur either due to liberation from peptides or proteins, whilst \textit{de novo} synthesis and export can also not be excluded. Due to the high variability, as rule of thumb for potential amino acid consumption or release a 20% deviation from the initial start point value was taken (see Table \ref{tab:aminoacidstable}).  Out of 18 amino acids analyzed, 7 amino acids were released by all three bacteria during the fermentation (glutamate, alanine, proline, tyrosine, isoleucine, leucine and phenylalanine), see Appendix Figures \ref{fig:aminoacidsfig1A}, \ref{fig:aminoacidsfig1B}, \ref{fig:aminoacidsfig1C}. Furthermore all mono-culture samples contained higher amounts of NH~3~ at 96 hours, indicating ammonia release from amino acid catabolism by all species [@vince1980ammonia]. 
+```{r aminoacidsfig, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+library("readxl")
+library("dplyr")
+library("tidyverse")
+library("ggpubr")
+library(facetscales)
+library("envalysis")
+
+df <- read_xlsx("Data_example/JoostAA.xlsx",sheet=2)
+getwd()
+
+df <- df %>% filter(ID != "std 1")
+## extract standards, calculate mean of norvaline
+mean_norvaline_std <- df%>%filter(Sample=="std_pjotr") %>% mutate(mean_norvaline = mean(Norvaline))
+mean_norvaline_std <- as.numeric(mean_norvaline_std[1,28])
+
+
+## normalize all peaks by dividing norvaline/mean * peak area
+## normalized area = (area compound/ area norvaline) * mean_norvaline
+
+## Do the transformations to end up with slopes for all AA in the standard curve
+## make tidy df, select all columns except information columns and norvaline column
+df_tidy_std <- df%>% filter(Sample=="std_joost") %>% gather(key=AA, value=Area, c(7:22, 24:27))
+
+##  calc normalized values: formula = (area AA/norvaline) * mean_norvaline
+df_tidy_std_normalized <- df_tidy_std %>% mutate(norm_area = (Area/Norvaline)*mean_norvaline_std)
+
+## Make a lineair regression line for each slope. 
+##In order to do this first create a dataframe with the concentrations of the standards,
+## then add this to the original df, then make linear regression for each component (norm area vs concentration)
+## extract the slopes of each sample and save in a df
+
+
+## make a df with the concentrations in the std
+ID <- c("std 1", "std 2", "std 3", "std 4", "std 5")
+concentration <- c(60, 25, 10, 2.5, 1.25)
+value_df <- as.data.frame(concentration, ID)
+value_df <- value_df %>% rownames_to_column(var="ID")
+
+## join the dfs to include the concentrations 
+df_std_total <- left_join(df_tidy_std_normalized, value_df, by="ID")
+
+
+## ggplot of 1 amino acid
+#df_std_total %>% filter(AA == "Histidine",
+ #                       Norvaline >0.001) %>% ggplot(aes(x=norm_area, y=concentration)) +
+#  geom_point() + 
+ # geom_smooth(method="lm") +
+#  stat_regline_equation() 
+## lineair regression model for 1 aa
+#df_hist <- df_std_total %>% filter(AA == "Histidine", Norvaline >0.001)
+#lm_histidine <- lm(concentration ~ 0 + norm_area, df_hist)
+
+##make an empty df in which the slopes can be copied
+slopes <- c()
+
+##remove std 1 that contains no norvaline peak (just to do calculations, check later if this is true in Chromeleon!)
+df_std_total <- df_std_total %>% filter(Norvaline >0.001)
+
+#calculate slope for each amino acid
+for (i in df_std_total$AA) {
+  data_sub <- subset(df_std_total, AA == i)
+  # assign(paste("df",i,sep="_"), data_sub)
+  lm <- lm(concentration ~ 0 + norm_area, data_sub)
+  assign(paste("lm",i,sep="_"), lm)
+ # plot <- ggplot(data_sub, aes(x=norm_area, y=concentration)) +
+  #  geom_smooth(method='lm') + 
+   # stat_regline_equation() +
+    #geom_point() + 
+    #ylab("Concentration (mM)") + xlab("normalized_area")
+  #assign(paste("plot",i, sep="_"), plot)
+  slope <- lm$coefficients[1]
+  slopes[i] <- slope
+  assign(paste("slope",i,sep="_"),slope)
+}
+
+## make a df of the slopes, make rownames a column with var AA and left_join to normalized COMPLETE df
+slopes <- as.data.frame(slopes)
+
+slopes <- slopes %>% rownames_to_column(var="AA")
+
+## extract standards, calculate mean of norvaline
+mean_norvaline_samples <- df%>%filter(stdorsample=="Sample") %>% mutate(mean_norvaline = mean(Norvaline))
+mean_norvaline_samples <- as.numeric(mean_norvaline_samples[1,28])
+
+## make a complete df with normalized samples
+df_tidy <- df%>% filter(Researcher=="Joost") %>% gather(key=AA, value=Area, c(7:22, 24:27))
+
+##  calc normalized values: formula = (area AA/norvaline) * mean_norvaline
+df_tidy_normalized <- df_tidy %>% mutate(norm_area = (Area/Norvaline)*mean_norvaline_samples)
+
+##join the slopes to the normalized df
+df_total <- left_join(df_tidy_normalized, slopes, by = "AA")
+
+
+### FILL IN FINAL DILUTION FACTOR OF SAMPLES >> FROM GABRIELA's DATA IT IS 12.5x << CHECk
+Dilution_factor <- 12.5
+## calculate the concentration of each Amino acid by multiplying the slope with the normalized area measured
+df_total_final <- df_total %>% mutate(final_concentration = (norm_area*slope)*Dilution_factor)
+
+
+##now make some small plots to check the data
+"%ni%" <- Negate("%in%")
+
+
+
+## first calculate averages in order to plot those, also calculate std dev for errorbars
+df_total_final <- df_total_final %>% group_by(Timepoint, Sample, AA) %>%
+  mutate(mean_conc = mean(final_concentration),
+         std_conc = sd(final_concentration)) %>%   filter(stdorsample == "Sample",
+                          Sample != "MQ")
+##ggplot histidine
+## make plot for Glycine, Histidine, Glutamate, Tyrosine
+## no standards no raw material
+#df_total_final %>% filter(AA %in% c("Glycine", "Tyrosine", "Histidine"),
+ #                         Sample %ni% c("raw_material", "std_joost","std_norv", "MQ")) %>%
+ # ggplot(aes(x=Timepoint, y=mean_conc)) +geom_point() + facet_grid(Sample~AA, scales = "free_y") +
+ # geom_errorbar(aes(x=Timepoint, ymin=mean_conc-std_conc, ymax=mean_conc+std_conc))
+
+
+
+## define scales for each plot
+#scales_y  <- c()
+#for (i in df_total_final$AA) {
+ # data_sub <- subset(df_total_final, AA == i)
+  #max_lim <- max(data_sub$mean_conc)
+  #scales_y[i] <- max_lim
+#}
+#scales_y <- as.list(scales_y)
+
+df_total_final <- df_total_final %>% filter(Sample != "raw_material")
+
+df_total_final[df_total_final == "Glutamine_arginine"] <- "Glutamine \n Arginine"
+df_property <- read_xlsx("Data_example/JoostAA.xlsx", sheet=3)
+#df_property <- df_property %>% select(AA, property)
+#df_total_final <- left_join(df_total_final, df_property, by ="AA")
+## now make a plot for all combos with all amino acids
+#for (i in df_total_final$AA) {
+ # data_sub <- subset(df_total_final, AA == i)
+  # assign(paste("df",i,sep="_"), data_sub)
+  
+  #plot <- ggplot(data_sub, aes(x=Timepoint, y=mean_conc)) + 
+   # geom_point(aes(x=Timepoint, y=final_concentration, col=as.character(Trial))) +
+    #geom_line() +
+    #geom_errorbar(aes(x=Timepoint, ymin=mean_conc-std_conc, ymax=mean_conc+std_conc)) +
+    #facet_wrap(.~Sample) + theme_publish() + scale_color_discrete(name = "Replicate ID")+
+    #ggtitle(paste(i)) +
+    #ylab(expression(paste("Concentration(",mu,"M)")))
+  #assign(paste("AA",i,sep="_"), plot) 
+ #ggsave(plot, file=paste0("plot_", i,".pdf"), width = 14, height = 20, units = "cm")
+#}
+
+### try to make an amazing grid with only mono plot (see if it is duable to view)
+df_total_mono <- df_total_final %>% filter(Sample %in% c("TMW","LL","PF"),
+                                           AA %ni% c("Asparagine","Cystine"))
+## make some settings for the mono plot
+
+labs <- c("LL" = "L. cremoris", "PF" = "P. freudenreichii", "TMW" = "Lb. plantarum")
+## define order of grid panels
+order <- c("LL","TMW","PF")
+df_total_mono <- dplyr::arrange(transform(df_total_mono, Sample=factor(Sample,levels=order),Sample))
+
+
+
+
+### Identify which amino acids are higher at end-point vs start point
+df_total_final0 <- df_total_final %>% filter(Timepoint == 0) %>% mutate(conc_0 = mean_conc) %>% select(Sample, Trial,AA, conc_0, Timepoint) 
+df_total_final96 <- df_total_final %>% filter(Timepoint == 96) %>% mutate(conc_96 = mean_conc) %>% select(Sample, Trial,AA, conc_96, Timepoint)
+
+
+## statistics for AA
+
+
+#df_comparison_endstart <- df_total_final0 %>% left_join(df_total_final96, by =c("Sample", "Trial", "AA"))
+#df_comparison_endstart$end_larger <- df_comparison_endstart$conc_96 > df_comparison_endstart$conc_0
+#df_comparison_endstart_consumed <- df_comparison_endstart %>% filter(end_larger == FALSE) %>% select(Sample,AA, conc_0, conc_96,end_larger) %>% distinct()
+
+#df_comparison_endstart_produced <- df_comparison_endstart %>% filter(end_larger == TRUE) %>% select(Sample,AA, conc_0, conc_96,end_larger) %>% distinct()
+
+## make list of only mono cultures
+#df_comparison_endstart_consumedmono <- df_comparison_endstart_consumed %>% filter(Sample %in% c("PF","LL","TMW"))
+#df_comparison_endstart_producedmono <- df_comparison_endstart_produced %>% filter(Sample %in% c("PF","LL","TMW"))
+
+
+```
+
+```{r AAstatistics, eval=FALSE, include=FALSE}
+df_total_mono0sep <- df_total_mono %>% filter(Timepoint == 0) %>% mutate(conc_0 = final_concentration) %>% select(Sample, Trial,AA, conc_0, Timepoint) 
+df_total_mono96sep <- df_total_mono %>% filter(Timepoint == 96) %>% mutate(conc_96 = final_concentration) %>% select(Sample, Trial,AA, conc_96, Timepoint)
+
+df_comparison_endstartsep <- df_total_mono0sep %>% left_join(df_total_mono96sep, by =c("Sample", "Trial", "AA"))
+
+
+#for (i in df_total_final$AA) {
+ # data_sub <- subset(df_total_final, AA == i)
+  # assign(paste("df",i,sep="_"), data_sub)
+  
+  #plot <- ggplot(data_sub, aes(x=Timepoint, y=mean_conc)) + 
+   # geom_point(aes(x=Timepoint, y=final_concentration, col=as.character(Trial))) +
+    #geom_line() +
+    #geom_errorbar(aes(x=Timepoint, ymin=mean_conc-std_conc, ymax=mean_conc+std_conc)) +
+    #facet_wrap(.~Sample) + theme_publish() + scale_color_discrete(name = "Replicate ID")+
+    #ggtitle(paste(i)) +
+    #ylab(expression(paste("Concentration(",mu,"M)")))
+  #assign(paste("AA",i,sep="_"), plot) 
+ #ggsave(plot, file=paste0("plot_", i,".pdf"), width = 14, height = 20, units = "cm")
+#}
+
+
+
+```
+
+
+```{r aminoacidstable2, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+### Identify which amino acids are higher at end-point vs start point for mono
+df_total_mono0 <- df_total_mono %>% filter(Timepoint == 0) %>% mutate(conc_0 = mean_conc) %>% select(Sample, Trial,AA, conc_0, Timepoint) 
+df_total_mono96 <- df_total_mono %>% filter(Timepoint == 96) %>% mutate(conc_96 = mean_conc) %>% select(Sample, Trial,AA, conc_96, Timepoint)
+
+
+df_comparison_endstart <- df_total_mono0 %>% left_join(df_total_mono96, by =c("Sample", "Trial", "AA"))
+
+df_comparison_endstart$end_10dif <- abs(df_comparison_endstart$conc_96-df_comparison_endstart$conc_0) > 0.2*df_comparison_endstart$conc_0
+df_comparison_endstart_true <- df_comparison_endstart %>% filter(end_10dif == TRUE)
+
+df_comparison_endstart_true$end_larger <- df_comparison_endstart_true$conc_96 > df_comparison_endstart_true$conc_0
+df_comparison_endstart_false <- df_comparison_endstart %>% filter(end_10dif == FALSE)
+
+df_comparison_endstart_false$end_larger <- '(+/-)'
+df_comparison_endstart <- rbind(df_comparison_endstart_true, df_comparison_endstart_false)
+
+
+
+
+df_comparison_endstart <- df_comparison_endstart %>% filter(Trial == 1) %>% select(Sample, AA, conc_0,conc_96,end_larger)
+
+df_comparison_endstart$end_larger[df_comparison_endstart$end_larger == TRUE] <- "(+)"
+df_comparison_endstart$end_larger[df_comparison_endstart$end_larger == FALSE] <- "(-)"
+library(kableExtra)
+library(janitor)
+library(knitr)
+
+df_AA_mono_table <- df_comparison_endstart %>% select(Sample, AA, end_larger) %>% spread(AA, end_larger) %>% t()
+df_AA_mono_table <- df_AA_mono_table %>% row_to_names(row_number = 1)
+df_AA_mono_table <- as.data.frame(df_AA_mono_table)
+
+
+## identify which amino acids are produced by all
+#all_prod <- df_comparison_endstart %>% filter(end_larger == "(+)") %>% group_by(AA) %>% filter(n() > 2)
+#unique(all_prod$AA)
+#length(unique(all_prod$AA))
+## identify which were consumed by all
+#all_cons <- df_comparison_endstart %>% filter(end_larger == "(-)") %>% group_by(AA) %>% filter(n() > 2)
+#unique(all_cons$AA)
+#length(unique(all_cons$AA))
+```
+
+```{r aminoacidstable, echo=FALSE, message=FALSE, warning=FALSE, fig.margin=TRUE, out.width=params$out_width}
+df_AA_mono_table %>% kbl(caption = paste(expression("Amino acid release or consumption per species. (+)-sign indicates $>$20 percent release, (+/-)-sign indicates  $<=$20 percent difference from starting concentrations, (-)-sign indicates $>$20 percent consumed during fermentation.")), escape = FALSE) %>% kable_styling(c("striped", "hover"))
+
+
+```
+
+
+```{r AAsum, echo=FALSE, message=FALSE, warning=FALSE, fig.margin=TRUE, out.width=params$out_width, fig.cap = "Total free amino acid content during lupin quark production by fermentation of \\textit{L. cremoris}, \\textit{Lb. plantarum} and \\textit{P. freudenreichii} "}
+df_total_final2 <- df_total_final %>% group_by(Sample,Timepoint) %>% filter(AA != "NH3") %>%
+  mutate(total_sum = sum(mean_conc), sd_sum =sd(mean_conc))
+df_total_final2 <- dplyr::arrange(transform(df_total_final2, Sample=factor(Sample,levels=order),Sample))
+
+df_total_final2 %>% filter(Sample %in% c("LL","PF","TMW")) %>% #filter(AA != "NH3") %>%
+  ggplot(aes(x=Timepoint, y=total_sum/1000)) + geom_point() + 
+  geom_errorbar(aes(x=Timepoint, ymin=(total_sum/1000)-(sd_sum/1000), ymax=(total_sum/1000)+(sd_sum/1000))) +
+  facet_grid(.~Sample, scales="free_y", labeller=labeller(Sample=labs)) + geom_line() +
+  theme_publish() + ylab("total mM of free amino acids") +
+  theme(strip.text.x = element_text(angle=0, size=10, face="italic", vjust=0.2))
+```
+
+For all three species significant release of free amino acids was observed (Figure \ref{fig:AAsum}), indicating some form of proteolytic or peptidase activity. Serine was found to be the sole amino acid consumed by all species and was depleted completely by all species at t=96 hours. Serine can be deaminated to pyruvate and can act as significant contributor to total fermentation end-products in \textit{L. lactis} [@novak2000metabolic; @aller2014nutritional] and \textit{Lb. plantarum} [@liu2003serine] and likely is utilized as source of carbon by \textit{P. freudenreichii} [@crow1987properties] as well. As reported previously, aspartate was consumed by \textit{P. freudenreichii} and likely converted to fumarate by aspartate:ammonia lyase [@falentin2010complete] to act as additional electron acceptor [@conway2021aspartate].  Next to aspartate and serine, also consumption of glutamine/arginine was observed for \textit{P. freudenreichii}, in line with earlier reports [@gagnaire2015emmental; @dalmasso2012temporal; @gagnaire2001propionibacteria]. \textit{L. cremoris} was found to have similar or higher contents of free amino acids for 16 out of 18 amino acids. Next to serine, also utilization of glutamine was observed. Glutamine acts as one of the most important media constituents for high biomass yields and is essential for growth in environments with low amino acid contents [@aller2014nutritional]. Glutamine act as nitrogen donor in \textit{L. lactis} and can be converted to glutamate and proline [@larsen2006glnr]. 
+
+```{r AAheat, echo=FALSE, message=FALSE, warning=FALSE, fig.margin=TRUE, out.width=params$out_width, fig.height= 10, fig.cap = "Relative abundance of amino acid contents in lupin quark after 96 hours. Negative values (blue) indicate relative low abundance, Positive values (red) indicate relative high abundance."}
+## make matrix of data by selecting the correct columns etc
+## make a heatmap with mean value and only endpoint
+
+df_heat_end <- df_total_final %>% filter(stdorsample == "Sample",
+                             Timepoint == 96,
+                             AA %ni% c("Asparagine","Cystine","NH3")) %>% select(Sample,Trial,AA,final_concentration) %>% group_by(Sample,AA) %>%
+  mutate(value = mean(final_concentration)) %>% select(-final_concentration,-Timepoint) %>% spread(AA, value) %>% select(-Trial) %>% ungroup() %>% distinct()
+
+
+df_heat_end <- df_heat_end %>% column_to_rownames(var="Sample")
+
+#create a matrix
+df_heat_end <- as.matrix(t(df_heat_end))
+
+
+#colnames(df_heat_end)
+
+
+
+
+
+
+cal_z_score <- function(x){
+  (x - mean(x)) / sd(x)
+}
+
+labs <- c("PF+TMW+LL" = "P. freudenreichii & \n L. cremoris & \n Lb. plantarum", "LL" = "L. cremoris","LL+TMW" = "L. cremoris & \n Lb. plantarum",
+          "PF" = "P. freudenreichii", "PF+TMW" = "P. freudenreichii & \n Lb. plantarum", "PF+LL" = "P. freudenreichii & \n L. cremoris",
+          "TMW" = "Lb. plantarum")
+
+
+#make a normalized heatmap
+data_subset_norm <- apply(df_heat_end, 1, cal_z_score)
+#remove nans 
+data_subset_norm <- na.omit(data_subset_norm)
+
+library(pheatmap)
+map <- pheatmap(data_subset_norm, show_rownames = TRUE,
+                labels_row = labs)
+
+map
+```
+
+To evaluate whether specific bacteria could be correlated with specific amino acid abundances in co-cultures, a heatmap was constructed based on relative abundance (Z-scores, see materials and methods section). Mono-cultures of \textit{L. cremoris} were associated with the highest relative abundance of 16 out of 18 amino acids. Only glutamine/arginine and lysine abundance was found below average amongst samples. Arginine and lysine are major constituents of \textit{L. lactis} cell walls [@driessen1989transport] and hence required for growth. Low abundance of alanine, aspartic acid, glycine and histidine were associated with fermentations containing \textit{P. freudenreichii}. Likewise, fermentations containing \textit{Lb. plantarum} were associated with low abundance of proline, threonine, trpytophan, glutamic acid, phenylalanine, valine, isoleucine, leucine and tyrosine. \textit{Lb. plantarum} WCFS1 lacks biosynthethic pathways for valine, leucine and isoleucine [@kleerebezem2003complete] and hence require these amino acids from their environment. Furthermore, for other \textit{Lb. plantarum} strains glutamic acid and threonine were also found to be esssential and phenylalanine and tryptophan stimulatory for growth [@saguir2007improvement]. Bacterial requirements for specific amino acids is thus reflected in the final free amino acid content of lupin quark. The increased content of most amino acids indicates there is no bacterial growth limitation in lupin quark due to amino acid limitations.
+
+
+
+### Vitamin B~12~ production in lupin quark {-}
+Fermented lupin milk was assayed for the presence of active vitamin B~12~ by reversed phase High performance liquid chromatography (RP-HPLC). After 4 days of fermentation samples containing \textit{P. freudenreichii} in mono-culture contained 2.9$\pm$ 0.05 $\mu$g B~12~, \textit{P. freudenreichii} and \textit{Lb. plantarum} 3.1$\pm$ 0.1 $\mu$g B~12~ and \textit{P. freudenreichii}, \textit{Lb. plantarum} and \textit{L. cremoris} 2.8$\pm$ 0.04 $\mu$g B~12~ per 100 gram of fermented product (see Table \ref{tab:B12lupinend}).
+
+```{r B12lupinend, out.width=params$out_width, echo=FALSE, message=FALSE, warning=FALSE, fig.width =7, fig.height=4, fig.margin=TRUE}
+library(forcats)
+library(dplyr)
+library(tidyverse)
+
+library("readxl")
+df <- read_excel("Data_example/B12 extraction calculation 18 jan22.xlsx", sheet = "Sheet1")
+## make endpoint plot for all samples
+df$Sample <- factor(df$Sample, levels=c( "PF", "PF+TMW", 
+                                         "All",
+                                         "LL", "TMW", "LLTMW"))
+plot_b12end <- df %>% filter(Timepoint == 96) %>%
+  group_by(Sample) %>% mutate(mean_b12 = mean(B12_100ug),
+                                                                   sd_b12 = sd(B12_100ug)) #%>%
+# # ggplot(aes(x=Sample, y=mean_b12)) + geom_point() +
+ # geom_errorbar(aes(x=Sample, ymin=mean_b12-sd_b12, ymax=mean_b12+sd_b12)) + theme_publish() + ylab(expression("µg B"[12] *" "*"per 100 gram product")) +
+  #scale_x_discrete(labels=c("All" = "L. cremoris & Lb. plant & P. freu", "LL" = "L. cremoris","LLTMW" = "L. cremoris & Lb. plantarum",
+   #                         "PF" = "P. freudenreichii", "PF+TMW" = "P. freudenreichii & Lb. plantarum",
+    #                        "TMW" = "Lb. plantarum")) +
+  #theme(axis.text.x = element_text(angle = 60, hjust=1)) +
+  #theme(axis.text.x = element_text(face="italic"))
+
+  #df_stat <- df %>% filter(Timepoint == 96)
+  #AOVB12 <- aov(B12_100ug ~ Sample, df_stat)
+  #tukeyb12 <- TukeyHSD(AOVB12)
+
+library(kableExtra)
+library(tidyr)
+library(knitr)
+
+## function for making table italic (column specific)
+format_cells <- function(df, rows ,cols, value = c("italics", "bold")){
+
+  # select the correct markup
+  # one * for italics, two ** for bold
+  map <- setNames(c("\\textit{", "\\textbf{"), c("italics", "bold"))
+  markup <- map[value]
+
+  for (r in rows){
+    for(c in cols){
+
+      # Make sure values are not factors
+      df[[c]] <- as.character( df[[c]])
+
+      # Update formatting
+      df[r, c] <- paste0(markup, df[r, c], "}")
+    }
+  }
+
+  return(df)
+}
+plot_b12end$Sample <- as.character(plot_b12end$Sample)
+### rename the values in the table
+plot_b12end$Sample[plot_b12end$Sample == "PF"] <- "P. freudenreichii"
+plot_b12end$Sample[plot_b12end$Sample == "PF+TMW"] <- "P. freudenreichii, Lb. plantarum"
+plot_b12end$Sample[plot_b12end$Sample == "All"] <- "P. freudenreichii, Lb. plantarum, L. cremoris"
+plot_b12end$Sample[plot_b12end$Sample == "LL"] <- "L. cremoris"
+plot_b12end$Sample[plot_b12end$Sample == "TMW"] <- "Lb. plantarum"
+plot_b12end$Sample[plot_b12end$Sample == "LLTMW"] <- "Lb. plantarum, L. cremoris"
+
+## make table
+plot_b12end$values <-  sprintf("%.1f \\pm %.2f", plot_b12end$mean_b12, plot_b12end$sd_b12)
+
+
+
+plot_b12end %>% select(Sample,values) %>% distinct() %>% 
+  format_cells(1:6,1, "italics") %>%
+  kbl(col.names = c("Sample", "$B_{12}$ content ($\\mu$g/100 gram product)"), caption ="Lupin quark $B_{12}$ contents at 96 hours.", escape = FALSE, position = "!b") %>% kable_material() 
+```
+
+Interestingly, production of B~12~ was thus highest in the co-culture of \textit{P. freudenreichii} and \textit{Lb. plantarum} compared to the mono-culture of \textit{P. freudenreichii} or co-culture containing all three bacteria (p<0.05, tukey HSD), albeit at minimum differences. The production of B~12~ after 4 days per 100 gram product in all samples more than meets the daily suggested intake of 2.4 $\mu$g per day. To monitor production speed, additional B~12~ measurements of lupin milk fermented with solely \textit{P. freudenreichii} and with \textit{P. freudenreichii} and \textit{Lb. plantarum} were taken at 24 and 48h (see Figure \ref{fig:B12lupin}). After 24h samples containing only \textit{P. freudenreichii} contained 2.4$\pm$ 0.5 $\mu$g B~12~ per 100 g and samples containing \textit{P. freudenreichii} and \textit{Lb. plantarum} contained 1.6$\pm$ 0.2 $\mu$g B~12~ per 100 g. Considerable amounts of B~12~ are thus produced on lupin milk within a day. The obtained yield on lupin is in the same range as found by @wolkers2018enhancing, who observed a yield of 0.97 $\mu$g B~12~ per 100 g lupin tempeh produced with \textit{P. freudenreichii}. Lupin, other legumes and cereals allow for significant \textit{in situ} B~12~ production by \textit{P. freudenreichii} [@xie2021fermentation]. \textit{P. freudenreichii} is therefore a promising candidate for \textit{in situ} B~12~ enrichment of plant-based foods.
+
+```{r B12lupin, out.width=params$out_width, echo=FALSE, message=FALSE, warning=FALSE, fig.width =7, fig.height=4, fig.margin=TRUE, fig.cap = "$B_{12}$ formation in time in lupin quark produced by \\textit{P. freudenreichii} or \\textit{P. freudenreichii} and \\textit{Lb. plantarum}"}
+
+#make plot of only pf
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+library(envalysis)
+
+
+## make plot for only pf samples
+plot_b12 <- df %>% filter(Sample %in% c("PF","PF+TMW")) %>% group_by(Timepoint, Sample) %>% mutate(mean_b12 = mean(B12_100ug),
+                                         sd_b12 = sd(B12_100ug)) %>%
+  ggplot(aes(x=Timepoint, y=mean_b12, shape=Sample)) + geom_point(size=2) + geom_line() +
+  geom_errorbar(aes(x=Timepoint, ymin=mean_b12-sd_b12, ymax=mean_b12+sd_b12, width=5)) + theme_publish() +
+  xlab("Time (hours)") + ylab(expression("µg B"[12] *" "*"per 100 gram product")) +
+  scale_shape_discrete(labels=c("PF" =expression(italic("P. freudenreichii")), "PF+TMW" = expression(italic("P. freudenreichii & Lb. plantarum"))))
+
+ df_stat1 <- df %>% filter(Timepoint == 24) %>% group_by(Sample) %>% mutate(meanB12 = mean(B12_100ug), sdB12 = sd(B12_100ug))
+  AOVB121 <- aov(B12_100ug ~ Sample, df_stat1)
+  tukeyb121 <- TukeyHSD(AOVB121)
+  df_stat2 <- df %>% filter(Timepoint == 48) %>% group_by(Sample) %>% mutate(meanB12 = mean(B12_100ug), sdB12 = sd(B12_100ug))
+  AOVB121 <- aov(B12_100ug ~ Sample, df_stat2)
+  tukeyb121 <- TukeyHSD(AOVB121)
+plot_b12
+```
+
+### Conclusion lupin quark{-}
+In general, \textit{P. freudenreichii} was able to ferment lupin milk in mono or in co-culture. The presence of \textit{P. freudenreichii} affects organic acids profiles, as not lactate but propionate and higher amounts of acetate can be found. Results indicate \textit{P. freudenreichii} only competes for sugar carbon sources when there is no sufficient release of lactate by consortium members. The  final product had a higher pH, probably due to consumption of lactate by \textit{P. freudenreichii}. Amino acid data indicates free amino acid contents increase during fermentation and hence do not pose as growth-limiting factor for any of the bacteria. All obtained products fermented with \textit{P. freudenreichii} contained vitamin B~12~ in high amounts, surpassing the daily suggested intake by consumption of 100 grams of fermented product already. \textit{P. freudenreichii} thus has proven to be an interesting microbe for \textit{in situ} B~12~ fortification of fermented food products, exemplified by our lupin milk fermentation.
+
+## Enhancing product characteristics of fermented foods by cross-over fermentation: The dairy miso case study {-}
+Cross-over fermentations can besides nutritional enrichment also be used for creating novel fermented food products or enhancing existing product characteristics. Below, an example by @dank2021cross is discussed in which miso, a traditional japanese fermented soybean paste, was combined with quark, unripened cheese commonly produced in Europe from cow's milk, to produce a novel food product called dairy miso. 
+
+Quark is made from heat-treated milk which is inoculated with starter lactic acid
+bacteria, usually *Lactococcus lactis* and in some cases rennet,
+resulting in acidification to a pH of \~4.5 and gelation. Traditionally,
+the whey is removed from the curd using linen cloth bags, whereas in
+industrial processes this is usually replaced by mechanical methods. The
+result of this process is a smooth creamy white product with a fresh and
+mildly acidic taste [@farkye2017quark].
+
+Miso is traditionally produced by fermenting soybeans with \textit{A. oryzae}
+pre-cultured on rice (called koji) in the presence of salt contents
+ranging from 55 to 200 g salt/kg product for up to 3 years
+[@shibasaki1962miso]. In addition to soybeans alone, many variations
+in grain and bean substitutes can be used for making miso
+[@shurtleff1976miso]. Koji is made from cooked polished rice grains
+inoculated with \textit{A. oryzae} incubated at 30 to 35$^{\circ}$ C for 2-3 days whilst
+regularly mixing. Before the mould starts sporulation, it is inoculated
+on to the soybeans [@shurtleff1980miso]. \textit{A. oryzae} has been used
+for solid-state fermentations already since 3000-2000 years ago in China
+and has a long history of use since 700 B.C in Japan for production of
+soy sauce, Japanese spirit (shochu), Japanese rice wine (sake) and miso
+[@gomi2007food]. \textit{A. oryzae} is known to secrete many hydrolytic
+enzymes during solid state fermentations [@machida2008genomics], like
+lipases [@ohnishi1994lipase], proteases and amylolytic enzymes
+[@maeda2004transcriptional]. Furthermore, \textit{A. oryzae} has been shown
+to produce $\beta-$galactosidase [@akasaki1976characterization]. These
+characteristics make \textit{A. oryzae} a potential candidate for fermentation
+of dairy substrates. 
+
+### Dairy miso resembles sweet-scented blue mould cheese {-}
+Dairy miso was produced by inoculating koji (\textit{A. oryzae} grown on rice) in quark in a 1:3 (weight/weight) ratio  using 60 g/kg NaCl, a salt concentration used in production of red sweet miso [@shurtleff1976miso]. Consequently, the aroma formation (volatile organic compounds, VOCs) over time was monitored by frequent sampling. VOC content increased drastically over time, see Figure \ref{fig:aroma}. A total of 77 individual components were detected, in which the aroma profile was largely dominated by acids and ethyl esters thereof
+(file A.1, supplementary data).
+
+```{r data and packages miso, include=FALSE, messages=FALSE}
+##this sheet contains all the analysis for the paper of Dairy MISO
+## start analysing the HPLC data of dairy miso production
+#Install and load packages
+#install.packages('tidyverse')
+#install.packages('ggplot2')
+#install.packages('tidyr')
+#install.packages('readxl')
+#install.packages('cowplot')
+#install.packages("scales")
+remotes::install_github("jpshanno/ecoflux")
+#install.packages("ggforce")
+#install.packages('lemon')
+#install.packages('ggpubr')
+#install.packages("devtools")
+require(devtools)
+#devtools::install_github("zeehio/facetscales")
+library(facetscales)
+library(ggpubr)
+require(tidyverse)
+require(ggplot2)
+require(tidyr)
+require(readxl)
+require(cowplot)
+library(scales)
+library("ecoflux")
+library(ggforce)
+library(lemon)
+library(envalysis)
+library(plyr)
+##specify a plot theme
+my_theme <-  theme_publish()
+
+#import data from HPLC
+data_hplc <- read_excel("Data_example/hplc analysis miso 6-6-2019.xlsx", sheet=3, skip=1)
+#look at the data 
+head(data_hplc)
+
+## make replicate a qualitative factor
+data_hplc$Replicate <- factor(data_hplc$Replicate)
+
+
+#Remove 0% replicate 1 from data > contamination
+`%nin%` = Negate(`%in%`)
+data_hplc <- data_hplc %>%
+  filter(Sample %nin% c("1","6","11", "16", "21", "26", "31", "36", "41", "46", "51", "56"))
+# only take data for the salt experiment
+hplc_clean_salt <- data_hplc %>%
+  filter(Experiment == "S")
+#tidy the data for ggplot
+hplc_salt_tidy <- hplc_clean_salt %>%
+  gather(key = Compound, value = mM, c(12:21))
+
+#make a plot with compounds lactose, glucose, ethanol, butyrate 
+#first order the factors 
+hplc_salt_tidy$Compound <- factor(hplc_salt_tidy$Compound, levels = c("lactose", "glucose", "ethanol", "butyrate", "citrate","Pyruvate","lactate","Glycerol","acetate","Propionate"))
+
+hplc_salt_tidy$Salt <-factor(hplc_salt_tidy$Salt)
+hplc_salt_tidy$Salt <- revalue(hplc_salt_tidy$Salt, c("0"="0 g/kg", "2"="20 g/kg","4"="40 g/kg","6"="60 g/kg","8"="80 g/kg","10"="100 g/kg","15"="150 g/kg","20"="200 g/kg"))
+
+#define scales for plot
+scales_y <- list(
+  `lactose` = scale_y_continuous(limits = c(0, 200), breaks = seq(0, 150, 50)),
+  `glucose` = scale_y_continuous(limits = c(0, 250), breaks = seq(0, 250, 50)),
+  `ethanol` = scale_y_continuous(limits = c(0, 500), breaks = seq(0, 500, 100)),
+  `butyrate`=scale_y_continuous(limits = c(0,25), breaks = seq(0,25,5))
+)
+
+
+#importdata
+data<-read_excel("Data_example/VarunZhaoying_finaltable.xlsx",skip=2)
+
+#definequalitativefactors(aerobic/inbutationtype/biologicalreplicate)intofactors
+data$Sample<-factor(data$Sample)
+data$Description<-NULL
+data$natamycin<-factor(data$natamycin)
+data$replicate <- factor(data$replicate)
+#takeaverageoftechnicalreplicates(samesampleanalysedmultipletimesinGCMS)
+#removethefactorsintheaggregatefunction
+data_avg<-aggregate(data[,-c(1,2,3,4,5,6,7,8,9,10)],by=list(data$Sample),FUN=mean)
+
+#addfactorsbackinfrontofaverages
+factors<-unique(data[,c(1,2,3,4,5,6,7,8,9,10)])
+data_avg<-cbind(factors,data_avg)
+data_avg$Group.1<-NULL
+
+####makeplottotalpeakarea (of time and salk experiment)###############
+
+#takesumofallcompounds
+n<-1:nrow(data_avg)
+for(i in n){
+  data_avg$sum[i]<-sum(data_avg[i,-c(1,2,3,4,5,6,7,8,9,10)])
+}
+
+#function to get nice y-label with "10^" instead of "e+"
+scientific_10 <- function(x) 
+{ifelse(x==0, "0", parse(text=gsub("[+]", "", gsub("e", " %*% 10^", scientific_format()(x)))))
+}
+
+#datainlongformat
+data_tidy<-data_avg%>%gather(key=Compound,value=AU,-c(1,2,3,4,5,6,7,8,9,10))
+
+#dataframelinkingcompoundnamestocompoundtypes
+type<-read_excel("Data_example/compoundtype.xlsx")
+data_tidy_group<-inner_join(data_tidy,type,by="Compound")
+
+#order compounds based on excel file 
+order<-read_excel("Data_example/ordercompounds.xlsx")
+data_tidy_group_order<-inner_join(data_tidy_group,order,by="Compound")
+
+data_tidy_group_order<-mutate(data_tidy_group_order,Compound=reorder(Compound,order))
+data_tidy_group_order$replicate <- factor(data_tidy_group_order$replicate)
+
+#makeplotpercompoundtype
+#dataframelinkingcompoundnamestocompoundtypes
+data_2<-data_tidy_group_order%>% group_by(Sample, type) %>% dplyr::mutate(sumtype=sum(AU))
+data_type<-unique(data_2[,c(1,2,3,4,5,6,7,8,9,10, 12,13,14,15)])
+library('plyr')
+data_2$Salt <-factor(data_2$Salt)
+data_2$Salt <- revalue(data_2$Salt, c("0"="0 g/kg", "2"="20 g/kg","4"="40 g/kg","6"="60 g/kg","8"="80 g/kg","10"="100 g/kg","15"="150 g/kg","20"="200 g/kg"))
+data_avg$Salt <-factor(data_avg$Salt)
+data_avg$Salt <- revalue(data_avg$Salt, c("0"="0 g/kg", "2"="20 g/kg","4"="40 g/kg","6"="60 g/kg","8"="80 g/kg","10"="100 g/kg","15"="150 g/kg","20"="200 g/kg"))
+
+
+##prepare a dataframe for cheese comparison plots
+data_miso <- data_avg %>%
+  filter(Fermentation %in% c(5,6,7,25,26),
+         Time == 68)
+data_cheese <- dplyr::filter(data_avg, grepl('cheese', experiment))
+
+data_cheese_plots <- rbind(data_miso,data_cheese)
+data_cheese_type <- dplyr::filter(data_2, grepl('cheese', experiment))
+data_miso_type <- data_2 %>% filter(Fermentation %in% c(5,6,7,25,26), 
+                                    Time == 68)
+data_cheese_type_plots <- rbind(data_cheese_type,data_miso_type)
+
+##prepare dataframe for oyxgen
+data_oxygen <- data_avg%>%
+  filter(Sample %in% c(362,363,364,365,366,367))
+data_oxygen_type <- data_type %>%
+  filter(Sample %in% c(362,363,364,365,366,367),
+         type != "Other",
+         type != "Aldehyde")
+
+## prepare dataframe for fat type
+data_fat_type <- data_avg %>%
+  filter(Fermentation %in% c(22,23,5,6,7),
+         Time %in% c(34,35))
+##prepare the dataframe for the production rates 
+#import prod rates
+prod_rates<-read_excel("Data_example/aroma_prod_rates.xlsx")
+
+#descriptive statistics prod rates
+average_rates<- prod_rates %>%
+  group_by(Salt) %>%
+  summarize_at("Slope",funs(mean,sd,se=sd(.)/sqrt(n())))
+my_comparisons = list( c("0", "2"), c("0", "4"), c("0", "6"), c("0","8"),c("0","10"), c("0","15"),c("0","20"), c("2", "4"), c("2", "6"), c("2","8"),c("2","10"), c("2","15"),c("2","20"),  c("4", "6"), c("4","8"),c("4","10"), c("4","15"),c("4","20"), c("6","8"),c("6","10"), c("6","15"),c("6","20"),c("8","10"), c("8","15"),c("8","20"), c("10","15"),c("10","20"), c("15","20")  )
+
+```
+
+```{r aroma, out.width=params$out_width, fig.cap = "Volatile organic compound development in dairy-based miso produced with 60 g/kg NaCl and \\textit{A. oryzae}. The total volatile organic compound development is shown on the left. Each volatile organic compound was assigned to a compound type (acids, alcohols, esters and ketones) and summed. The total of each group at each time point is shown on the right. Aroma formation was followed over a course of 68 days. Biological replicates (n=3) are displayed by different colours.", echo=FALSE, message=FALSE, warning=FALSE, fig.height = 5, fig.margin=TRUE, fig.scap="Aroma formation of dairy-based miso produced with 60 g/kg NaCl and \\textit{A. oryzae}."}
+
+Figure_1a <-data_avg%>%
+  filter(Fermentation>4.5,
+         Fermentation<7.5)%>%
+  ggplot(aes(x=Time,y=sum,col=as.factor(Fermentation)))+
+  geom_point()+
+  xlab("Time(d)")+
+  ylab("Total of quantifying peak areas")+
+  theme_minimal() +
+  theme(legend.position="none")+
+  scale_y_continuous(label=scientific_10)+
+  expand_limits(x = 0, y = 0) + my_theme +
+  scale_color_hue(name = "Replicate", labels = c("1", "2","3"))
+
+#Plot the separate compounds
+Figure_1b <-data_2%>%
+  filter(Inoculation=="Koji",
+         Fermentation>4.5,
+         Fermentation<7.5,
+         type!="Aldehyde",
+         type!="Other") %>%
+  ggplot(aes(x=Time,y=sumtype,col=as.factor(Fermentation)))+
+  geom_point()+
+  facet_wrap(~type,scales="free")+
+  theme_minimal()+
+  theme(legend.position="none")+
+  xlab("Time(d)")+
+  ylab("Quantifying peak area")+
+  scale_y_continuous(label=scientific_10)+
+  expand_limits(x = 0, y = 0) + my_theme +
+  scale_color_hue(name = "Replicate", labels = c("1", "2","3"))
+
+ggarrange(Figure_1a, Figure_1b, widths = c(1,2)) 
+
+```
+
+The profiles of VOCs detected in the dairy miso were compared with those of commercial blue mould cheese and white mould cheese. The total amount of VOCs found in dairy miso exceeds the amount detected on blue and white
+mould cheeses with up to 3 times more total response (Figure \ref{fig:cheeses}). Compared to mould cheeses a relatively high amount of higher alcohols and esters was found in dairy miso, resulting in very strong sweet and floral notes and less pungent ketone smell typical for mould cheeses [@spinnler2004surface]. These sweet notes at lower salt contents are due to the production of fruity ethyl esters (i.e. ethyl pentanoate(apple), ethyl hexanoate(pineapple), ethyl heptanoate(fruit) and many others, see Figure A.1, supplementary data) derived from fatty acid metabolism and ethanol. In order to form ethyl esters in (dairy) miso, ethanol and acyl-CoA, which derive from free fatty acids, are required together with alcohol O-acetyltransferase activity [@saerens2006saccharomyces]. Thus, both ethanol (primary metabolism) and free fatty acid concentrations (lipolytic activity) may be the rate determining factors for final ethyl ester content found in dairy miso.
+
+```{r cheeses, out.width=params$out_width, fig.cap = "Comparison of volatile organic compound contents between a commercial blue mould cheese, white mould cheese and dairy miso of 68 days old produced with 60 g/kg NaCl and \\textit{A. oryzae}. The total volatile organic compound development is shown on the left. Each volatile organic compound was assigned to a compound type (acids, alcohols, esters and ketones) and summed. The total of each group is shown on the right.", echo=FALSE, message=FALSE, warning=FALSE, fig.width =7, fig.asp = 0.8, fig.margin=TRUE, fig.scap="Comparison of volatile organic compound contents between a commercial blue mould cheese, white mould cheese and dairy miso produced with 60 g/kg NaCl"}
+
+#plot cheese
+Figure_2a <-data_cheese_plots %>%
+  ggplot(aes(x=experiment,y=sum))+
+  geom_point()+
+  xlab("Cheese type")+
+  ylab("Total of quantifying peak areas")+
+  my_theme +
+  scale_y_continuous(label=scientific_10)+
+  expand_limits(y = 0) +
+  scale_x_discrete(labels= c("Blue mould cheese", "Dairy Miso", "White mould cheese"))+
+  theme(axis.text.x = element_text(size=6, angle=45,  hjust = 0.5, vjust = 0.5))
+
+
+#Plot cheese
+Figure_2b <-data_cheese_type_plots%>%
+  filter(type!="Aldehyde",
+         type!="Other",
+         experiment %in% c("Longterm baseline", "Blue cheese", "White mould cheese")) %>%
+  ggplot(aes(x=experiment, y=sumtype))+
+  geom_point()+
+  facet_wrap(~type,scales="free")+
+  theme_minimal()+
+  xlab("Cheese type")+
+  ylab("Quantifying peak area")+
+  my_theme +
+  scale_y_continuous(label=scientific_10)+
+  expand_limits(y = 0) +
+  scale_x_discrete(labels= c("Blue mould cheese", "Dairy Miso", "White mould cheese"))+
+  theme(axis.text.x = element_text(size=6, angle=45,  hjust = 0.5, vjust = 0.5))
+
+ggarrange(Figure_2a, Figure_2b, widths = c(1,2))
+
+
+
+```
+
+### Traditional production practices influence final product characteristics {-}
+
+#### Salt content affects lipolytic activity of \textit{A. oryzae} {-}
+In traditional miso production various sodium chloride contents are used
+to produce different kinds of miso flavours [@shurtleff1976miso]. Addition of salt lowers the water activity (a~w~) of products and correspondingly affects the fermenting microorganisms. Generally, traditional miso with a low
+salt content (\<70 g/kg) tends to ferment quickly, resulting in a miso with a sweet taste, whilst miso with a higher salt content (>100 g/kg) has a more savoury taste [@shurtleff1976miso]. 
+
+Dairy miso produced with NaCl contents ranging from 0 to 200 g/kg show \textit{A. oryzae} is not affected at large in terms of aroma production up to 80 g/kg NaCl and is able to produce significant amounts of aroma up to 200 g/kg NaCl (Figure \ref{fig:vocsalt}). 
+```{r vocsalt, out.width=params$out_width, fig.cap = "Total volatile organic compound development for dairy miso produced using NaCl contents ranging from 0 to 200 g/kg over a course of 30 days. Biological replicates (n=3) are displayed by different shapes.", echo=FALSE, message=FALSE, warning=FALSE, fig.width =7, fig.asp = 0.8, fig.margin=TRUE, fig.scap="Total volatile organic compound development for dairy miso produced using NaCl contents ranging from 0 to 200 g/kg over a course of 30 days"}
+
+data_avg%>%
+  filter(experiment == "Salt",
+         Fermentation != 12,
+         Fermentation !=8,
+         Fermentation !=13,
+         Fermentation != 33,
+         Student == "Zhaoying",
+         Time <= 40)%>%
+  ggplot(aes(x=Time,y=sum,col=as.factor(Salt), shape=replicate))+
+  geom_point(size=3, alpha=.4)+
+  facet_wrap(.~Salt, ncol=4) +
+  theme_bw()+
+  xlab("Time(d)")+
+  ylab("Total of quantifying peak areas")+
+  my_theme + 
+  scale_y_continuous(label=scientific_10)+
+  scale_shape_discrete(guide=guide_legend(override.aes=list(alpha=1, size=3)))+
+  scale_color_discrete(guide=guide_legend(override.aes=list(alpha=1, size=3))) +
+  labs(color = "Salt content", shape = "Replicate")+
+  expand_limits(x = 0, y = 0) +  geom_hline(aes(yintercept=-Inf)) + 
+  geom_vline(aes(xintercept=-Inf)) + 
+  coord_cartesian(clip="off")+
+  theme(legend.position="bottom", legend.box="vertical", legend.margin=margin())  +
+  theme(legend.position="none")
+
+average_rates$Salt <- as.factor(average_rates$Salt)
+average_rates$Salt <- revalue(average_rates$Salt, c("0"="0 g/kg", "2"="20 g/kg","4"="40 g/kg","6"="60 g/kg","8"="80 g/kg","10"="100 g/kg","15"="150 g/kg","20"="200 g/kg")) 
+
+```
+However, at  \>100 g/kg salt significant lower aroma production rates are found compared to \<80
+g/kg salt containing dairy miso (Figure \ref{fig:rates}, file A.2, supplementary data) signifying a reduced metabolic capacity. Indeed visual observations showed more viscous samples above 100 g/kg salt containing dairy miso, indicating reduced proteolytic and/or lipolytic activity, an observation which is also made in blue cheese in which the addition of
+salt reduces proteolytic activity of *Penecillium roqueforti* [@kinsella1976enzymes].
+
+Lower free fatty acids and ester contents (Figure \ref{fig:vocsalttype}) and production rates (file A.2, supplementary data) were found, pointing towards reduced lipolytic activity of \textit{A. oryzae}. Primary metabolism of lactose was not affected at large between the different salt concentrations and the main metabolite produced remained ethanol (Figure \ref{fig:metabolitesalt}). Primary metabolism of sugars was therefore not affected to large extends by increments of salt. Indeed, \textit{A. oryzae} has been shown to be able to grow at an a~w~ of 0.85 [@gibson1994predicting], whereas dairy miso with a salt content of 200 g/kg had an a~w~ of 0.861.
+
+Next to ethanol also pyruvate, acetate, citrate, butyrate, glycerol, and propionate were detected (Figure \ref{fig:metabolitesalt}). Ethanol, pyruvate and
+citrate production was not notably affected by higher salt contents, agreeing with no noticable decline of glycolytic activity. Butyrate, a common milk fat hydrolysis product in blue cheese [@kinsella1976enzymes], glycerol a product of fat hydrolysis [@fu1995oil] and propionate (Figure \ref{fig:metabolitesalt}, Figure A.2, supplementary
+data) production decreased at high salt contents. This is in agreement with the maximal lipolytic activity in blue mould cheese, which occurs between 40-60 g/kg NaCl [@fox2004cheese]. These results clearly show fat hydrolysis slowed down by
+the addition of salt. It seems therefore that the main effect of salt is a decreased lipolytic activity, whereas glycolytic activity is not affected at large.
+
+```{r rates, out.width=params$out_width, fig.cap = "Volatile organic compound production rates for different NaCl contents estimated by fitting linear models for the first 10 days for biological replicates (0 to 80 g/kg NaCl n=3, 100,150,200 g/kg NaCl n=2). Slopes of the linear models were considered to be the aroma production rate per day.", echo=FALSE, message=FALSE, warning=FALSE, fig.width =7, fig.height=4, fig.margin=TRUE, fig.scap="Volatile organic compound production rates for different NaCl contents estimated by fitting linear models for the first 10 days", fig.height=3}
+average_rates %>%
+  ggplot(aes(x=as.factor(Salt), y=mean, fill=as.factor(Salt))) + 
+  geom_col() +
+  geom_errorbar(aes(x=as.factor(Salt), ymin=mean-se, ymax=mean+se), width=0.4, alpha=0.9, size=1.3) +
+  theme_bw() +
+  xlab("Salt content")+
+  ylab(expression(paste("Aroma production rate in first 10 days\n (Quantifying peak area/day)")))+
+  my_theme +
+  scale_y_continuous(label=scientific_10)+
+  labs(fill = "Salt content")+
+  expand_limits(x = 0, y = 0) +
+  theme(plot.margin = margin(t = .8, r = .8, b = .8, l = .8, unit = "cm"),
+        legend.position = "none")
+
+
+```
+
+```{r vocsalttype, out.width=params$out_width, fig.cap = " Volatile organic compound development per compound type for dairy miso produced using NaCl contents ranging from 0 to 200 g/kg over a course of 30 days. Biological replicates are displayed by different shapes (0 to 80 g/kg NaCl n=3, 100,150,200 g/kg NaCl n=2).", echo=FALSE, message=FALSE, warning=FALSE, fig.width =7, fig.asp = 0.8, fig.margin=TRUE, fig.scap="Volatile organic compound development per compound type for dairy miso produced using NaCl contents ranging from 0 to 200 g/kg over a course of 30 days"}
+data_2%>%
+  filter(Inoculation=="Koji",
+         type!="Aldehyde",
+         type!="Other",
+         experiment == "Salt",
+         Fermentation != 12,
+         Fermentation !=8,
+         Fermentation !=13,
+         Fermentation != 33,
+         Student == "Zhaoying",
+         Time <= 40)%>%
+  ggplot(aes(x=Time,y=sumtype,col=as.factor(Salt), shape=replicate))+
+  geom_point(alpha=0.1, size=2) +
+  facet_grid(type~Salt,scales="free_y")+
+  theme_bw()+
+  xlab("Time(d)") +
+  ylab("Quantifying peak area")+
+  my_theme +
+  scale_y_continuous(label=scientific_10)+
+  scale_shape_discrete(guide=guide_legend(override.aes=list(alpha=1, size=3)))+
+  scale_color_discrete(guide=guide_legend(override.aes=list(alpha=1, size=3))) +
+  labs(color = "Salt content", shape = "Replicate")+
+  expand_limits(x = 0, y = 0)+  geom_hline(aes(yintercept=-Inf)) + 
+  geom_vline(aes(xintercept=-Inf)) + 
+  coord_cartesian(clip="off") +
+  theme(legend.position="none", legend.box="vertical", legend.margin=margin(),
+        strip.text.x = element_text(size = 8),
+        axis.text.x = element_text(angle=90, hjust=1, size=8))
+
+```
+
+```{r metabolitesalt, out.width=params$out_width, fig.cap = "Metabolite consumption and production during dairy miso production using various NaCl contents and \\textit{A. oryzae}. Each miso was followed over a time period of at least 30 days. Biological replicates (n=3) are displayed by different colours.", echo=FALSE, message=FALSE, warning=FALSE, fig.width =7, fig.asp = 0.8, fig.margin=TRUE, fig.scap="Metabolite consumption and production during dairy miso production using various NaCl contents and \\textit{A. oryzae}"}
+hplc_salt_tidy %>%
+  filter(Compound %in% c("lactose","glucose","ethanol","butyrate")) %>%
+  ggplot(aes(x=Time,y=mM, col = Replicate)) +
+  geom_point(alpha=0.7) + facet_grid_sc(Compound~Salt, scales = list(y=scales_y)) +
+  xlab("Time in days") + ylab("Concentration (mM)") +
+  my_theme + geom_hline(aes(yintercept=-Inf)) + 
+  geom_vline(aes(xintercept=-Inf)) + 
+  coord_cartesian(clip="off")+
+  theme(axis.text.x = element_text(size=8, angle=90,  hjust = 1),
+        strip.text.x = element_text(size = 8))
+```
+
+#### Initial fat content determines volatile organic compound composition {-}
+
+The dominant VOCs found in dairy miso produced with full fat quark
+mainly originate from fat degradation. Indeed, dairy miso produced with quark with a low fat content (0.5
+g/100g) had lower ester contents compared to full fat quark (8.6 g/100g). Products of fat hydrolysis all declined drastically (Figure \ref{fig:fats}), clearly demonstrating the importance of milk fat hydrolysis in aroma formation of dairy miso and demonstrating the importance of soy bean oil for traditional miso. Accordingly, in blue mould cheeses lipase activity of the moulds is responsible for characteristic aroma due to liberation of free fatty acids and subsequent degradation into ketones [@spinnler2004surface]. Notably, higher alcohol contents were found in low-fat quark compared to
+full-fat quark, showing alcohol formation during dairy miso production mainly originates from carbohydrate substrates present in the quark and rice, i.e. lactose and glucose.
+
+```{r fats, out.width=params$out_width, fig.cap = "Effect of initial fat content on volatile organic compound formation of dairy miso after 28 days using 60 g/kg NaCl (n=3 for full-fat, n=2 for low-fat quark).", echo=FALSE, message=FALSE, warning=FALSE, fig.height= 4, fig.margin=TRUE, fig.scap="Effect of initial fat content on volatile organic compound formation of dairy miso after 28 days using 60 g/kg NaCl", fig.height=3}
+data_fat_type%>%
+  ggplot(aes(x=experiment,y=sum))+
+  geom_point()+
+  theme_minimal()+
+  xlab("Quark")+
+  ylab("Total of quantifying peak areas")+
+  my_theme + 
+  scale_y_continuous(label=scientific_10)+
+  expand_limits(x = 0, y = 0)+
+  scale_x_discrete(labels = c("Full fat (8.6%)", "Low fat (0.5%)"))
+
+```
+
+### Conclusion diary miso {-}
+In general, by using tradition process parameters like salt and fat content it is possible to steer volatile
+organic compound formation in dairy miso. Targeting both the fungal primary metabolism or extracellular fat hydrolysis by changing these parameters gives an opportunity to steer formation of specific compound groups, resulting in more sweet/floral or savory dairy miso. The use of \textit{A. oryzae} for fermentation of quark resulted in a novel food product with interesting characteristics, which exemplifies the possibilties for novel fermented food product development. Traditional process parameters can be used to affect the fermenting organism during cross-over fermentations, resulting the possibility to steer product characteristics during novel fermented food product development.
+
+## General discussion {-}
+Interesting spontaneous fermentations without addition of starter cultures are carried out all across the globe. The microorganisms in these fermentations convert raw material into fermented food products and thereby can increase shelf-life, nutritional value and organoleptic properties [@noutbook]. Manufacturer's practices such as back-slopping, temperature regimes and fermentation duration shapes microbial communities [@moonga2021influence;@moonga2020composition] and re-using fermentation equipment decreases microbial diversity over time, as the fermentation will be driven more and more by the dominant species [@groenenboom2020microbial]. Historically speaking this has lead to isolation of these dominant species and the utilization of single-strain or multiple-strain defined starter cultures. A clear benefit of isolation of these dominant players is that they are adapted to fermentation of the raw material. Furthermore, the use of defined starters increases product consistency and safety [@ross2002preservation]. In addition, if strains have been historically used for a long time they have evolved (are domesticated) to be better adapted to utilization of the raw material in which they are applied. Dairy \textit{L. lactis} strains for instance have acquired genetic material that facilitates more efficient use of milk [@kelly2010chromosomal;@bachmann2012microbial]. Likewise, \textit{Saccharomyces cerevisiae} can be clustered genetically based on its biotechnological application [@legras2007bread] and domestication of \textit{S. cerevisiae} in beer brewing has lead to drastic changes in genome structure and stability [@gallone2018origins]. Domestication leads to strains with desirable fermentation properties and to strains that have been better adapted to the raw material, leading to faster production processes. Furthermore, domestication of microbes can lead to the loss of undesirable traits, such as production of toxins [@gibbons2012evolutionary; @gibbons2015genomics]. However, a clear drawback is that the metabolic activity displayed during fermentations using defined starters is limited to the genetic potential of the applied starter culture. Often, domesticated starters have smaller chromosomes due to genomic decay [@kelly2010chromosomal;@gibbons2012evolutionary;@gibbons2015genomics] and therefore are less flexible for application in other raw material. Furthermore, utilization of defined starters instead of spontaneous fermentation could reduce nutritional quality of a product, such as exclusion of B~12~ producing \textit{Klebsiella pneumoniae} or \textit{Citrobacter freundii}, which are not associated with the starter mould, [@keuth1994vitamin; @nout2005tempe] in tempeh.
+
+Although often desirable and beneficial traits are displayed by defined-starters in production of conventional fermented food products, the genetic drawback may pose a limitation in novel food product development. Indeed, diversification of microbial communities in food fermentation is associated with more intense food flavor [@ganzle2022periodic]. For instance, in cheese production non-starter lactic acid bacteria significantly contribute to aroma formation [@lo2018genetic], even if they are in low abundance [@van2019aroma]; sourdough bread (spontaneous fermentation) has higher aromatic complexity and intensity compared to bread made with bakers yeast [@hansen2005generation] and Chinese liquor \textit{Baijou}, which is microbially very diverse, has more organoleptic complexity than whiskey which is microbially less diverse [@ganzle2022periodic]. When designing novel products single strain genomic scarcity of domesticated strains thus may pose a hurdle. This is exemplified by an attempt to brew low-alcoholic 'fruity' beer. The high ethanol-forming nature of \textit{S. cerevisiae} in its relation to release of 'fruity' volatile organic acids limits its application in the development of 'fruity' low-alcoholic beers (ignoring technological solutions) [@van2017performance]. In contrast, application of non-domesticated non-conventional yeasts \textit{Cyberlindnera fabianii} and \textit{Pichia kudriavzevii} isolated from masau fruits from Zimbabwe [@nyanga2007yeasts] did result in fruity low-alcoholic beers [@van2017performance]. The use of non-conventional yeasts genera such as \textit{Dekkera}, \textit{Hanseniaspora}, \textit{Pichia}, \textit{Wickerhamomyces} and others in beer brewing shows potential for development of novel craft beers with desirable properties such as reduced calory and alcohol contents or for bioflavoring [@basso2016could].  Since in modern day era we have the scientific knowledge to construct which microbes in a microbial consortium may display the beneficial activity we may use these microbes in the design of novel fermented food products, aiming at increasing desirable organoleptic or nutritional properties. The vast microbial diversity out there in spontaneous fermentations carried out all across the globe provides ample opportunities at identifying and applying microbes with beneficial traits in non-conventional novel food fermentations.
+ 
+
+## Conclusion {-}
+Cross-over fermentations are processes in which a microorganism from one traditional fermentation process is introduced onto a new substrate and/or to a new partner [@dank2021cross]. Here we show the potential of cross-over fermentations in nutritionally enriching food products or development of novel fermented foods. We demonstrated \textit{P. freudenreichii} is an excellent candidate for \textit{in situ} enrichment of B~12~ in food products. Its low nutritional requirements [@falentin2010complete;@mccubbin2020pan] and preference of lactate over sugars [@lee1974diauxic] make it an excellent microorganism for inclusion in defined starter cultures. Cross-over fermentations also show a large potential in the development of novel food products, as exemplified by the dairy miso study. We showed interesting novel food products can be designed and taking into account traditional production parameters novel fermented food product characteristics can be steered. Next to enhanced nutritional quality or interesting organoleptic properties, cross-over fermentations may also be used to utilize locally grown substrates. The use of locally grown substrates instead of imported substrates, such as replacing soy with a native European bean such as lupin, can result in more sustainable food production [@wolkers2018enhancing] by reducing food mileages. Nutritional enrichments by fermentation with vitamin producers also enables dietary switches towards more plant-based protein sources, thereby showing great potential in applications aiding the protein transition from animal towards plant-derived protein sources which is needed to feed the world in the future [@aiking2018next]. The enormous diversity of microorganisms used in traditional fermentation processes and the vast number of alternative substrates offer numerous opportunities for the development of novel fermented products.
+
+## Declaration of interest {-}
+
+Declarations of interest: none.
+
+## Acknowledgements {-}
+
+This work was supported by Arla Foods (Aarhus, Denmark).
+
+## Materials and methods {-}
+
+### Lupin quark {-}
+All Materials and methods (except for B~12~ analysis, bacterial growth counts and amino acid data analysis, see below) for lupin quark study were identical to the methods used by @canoylupin and are available upon request. Below a brief description of all methods is found.
+
+#### Strains and pre-culture media {-}
+\textit{P. freudenreichii} DSM 20271 was obtained from Deutsche Sammlung von Mikroorganismen und Zellkulturen (DSMZ) and routinely grown on Yeast extract lactate broth and agar with composition described in @dank2021respiration in anaerobic conditions. \textit{Lb. plantarum} TMW 1.460 was obtained from Lehrstuhl für Technische Mikrobiologie Weihenstephan (Technical University of Munich, Freising, Germany) and routinely grown on MRS broth and agar in microaerobic conditions. \textit{L. cremoris} DSM 20388 was obtained from DSMZ and routinely grown on GM17 (Difco M17 supplemented with 0.5% w/v D-glucose) in aerobic conditions.
+
+#### Lupin milk production {-}
+Lupin milk was produced by the methods described by @canoylupin with slight modifications. Lupin bits from seeds of \textit{Lupinus albus} were soaked overnight. The soaking water was removed and warm water was added. The mixture was ground for 5 minutes in a food processor (Waring commercial Laboratory blender) and filtered through a four-layered cotton cloth. Lupin milk was pasteurised by heating the milk to boiling point in a microwave (1800 W, 45 seconds) after which it was placed in a 95$^\circ$C water bath for 60 seconds. 
+
+#### Lupin quark fermentation {-}
+Lupin quark was produced according to the methods of @canoylupin. Greiner tubes were filled with 25 mL of pasteurized lupin milk and inoculated with 1 % of pre-cultures in mono-culture fermentations and in combinations with only 1 lactic acid bacteria. 0.5% inoculum was used for the lactic acid bacteria when both \textit{Lb. plantarum} and \textit{L. cremoris} were present. After inoculation lupin milk was vortexed and incubated at 30$^\circ$C. Samples were taken at regular time intervals. 
+
+#### Bacterial growth quantification {-}
+Bacterial growth in lupin milk was analyzed by serial dilutions of 1 mL of lupin milk in Peptone Physiological Saline solution. \textit{Lb. plantarum} was grown on MRS supplemented with either 20 mM sorbitol (in co-culture experiments with \textit{L. cremoris}) or glucose and incubated in microaerophilic conditions. \textit{Lb. plantarum} was grown on GM17 aerobically. \textit{P. freudenreichii} was grown on YEL with composition described by @dank2021respiration and incubated anaerobically. \textit{Lb. plantarum} and \textit{L. cremoris} plates were counted after 2 days, \textit{P. freudenreichii} containing plates were counted after 7-10 days. Plates with counts between 10 and 500 were considered valid and cfu/mL was calculated using these counts. If 2 different dilutions were counted within this interval, the average cfu/mL of the two dilutions was used as calculated cfu/mL. Points were only displayed if both replicates at a specific time point were above detection limit ($10^6$).
+
+#### Analysis of extracellular organic acids and ethanol {-}
+For quantification of extracellular organic acids and ethanol the methods described by @dank2021respiration were used. A standard curve of each component was added to the sequence to quantify each component.
+
+#### Analysis of sugars  {-}
+Analysis of sugars was performed according to the methods of @canoylupin.
+
+
+#### Amino acid quantification and data analysis {-}
+Amino acid profiles were determined by HPLC according to the methods of @scott2021nitrogenous. A heatmap was constructed using Pheatmap [@kolde2018package] in R-studio. Amino acid content was normalized using Z-scores [@jain2005score], after which hierarchical clustering was performed amongst samples using complete-linkage clustering in Pheatmap [@dank2021respiration].
+
+
+#### Vitamin B~12~ quantification {-}
+Vitamin B~12~ content was determined using the following procedures: Extraction of B~12~ was performed in 100 mL scott flasks containing 35 mL sodium acetate buffer (pH 4.5), 0.5 g Taka-diastase (from \textit{A. oryzae}), 0.2 mL lysozyme (15%, from chicken egg white). Approximatly 10 g of sample was added after which the flasks were incubated in a 30$^\circ$C waterbath for 30 minutes. Flasks were shaken by hand regularly in-between. After 30 minutes 0.2 mL (1%) Pepsin and 0.25 mL potassium cyanide (4%) was added and samples were placed back for 45 minutes. After 45 minutes, flasks were transferred to a 100$^\circ$C waterbath for 30 minutes. After cooling to room temperature, the extract was transferred to 50 mL Greiner tubes and centrifuged at 4$^\circ$C for 15 minutes. Extracts were filtered through Whatman grade 2v qualitative filter papers (pre-folded, 240 mm) and collected. Extract were then concentrated using Immunoaffinity columns (ds Easy-extract vitamin B~12~, R-biopharm) into InertSep empty reservoirs (20mL). ~30 mL of filtrate was loaded in the reservoirs and run over the columns, after which columns were washed with 10 mL MiliQ water and flushed dry with a syringe. Next, 4 mL methanol (100%) was loaded over the column and collected in reaction tubes. Tubes were dried at 50$^\circ$C on a heating block whilst flushing with nitrogen gas after which 1 mL of eluent for LC-MS (10mM ammonium formate + 1 mL formic acid per Liter) was added to the tube, mixed and vortexed. The concentrated extracted B~12~ was filtered through 0.2 $\mu$m filters and placed in amber LC-MS vials upon analysis. B~12~ was detected by using Agilent LC-MS with 100mm*3.0mm HSS C18-3.5 $\mu$m column at a flow rate of 0.4 mL/min eluent with composition described above and injection volume of 15 $\mu$L. An eluent gradient was used with 2 mobile phases. Phase A consisted per liter of 10 mM ammoniumformate with 0.1% formic acid in water and phase B same composition but then in methanol. At t=0 min 99% eluent A and 1% eluent B was used which changed gradually to 2% eluent A and 98% eluent B at 30 minutes. After each injection the sample was flushed using the start composition for 5 minutes. A calibration curve of vitamin B~12~ was prepared in order to be able to quantify B~12~ in each injection, after which final vitamin B~12~ contents were calculated using equation \eqref{eq:1}:
+
+\begin{equation}
+\begin{split}
+&  Concentration_{product}(\frac{\mu g}{100g}) =     \\
+& Concentration_{detected}(\frac{\mu g}{ml})*\frac{total~extraction~volume}{volume~run~over~column} *\frac{100}{sample(g)} \label{eq:1}
+\end{split}
+\end{equation}
+
+
+
+### Dairy miso {-}
+Materials and methods for the dairy miso case study are available at: @dank2021cross
+
+\newpage
+
+## Appendix A. Supplementary data {-}
+
+
+```{r aminoacidsfig1A, echo=FALSE, message=FALSE, warning=FALSE, fig.height= 9.5, fig.margin=TRUE, out.width=params$out_width, fig.cap = "Amino acid profiles during lupin quark production" }
+
+library(ggforce)
+plot_AA_mono_1 <- ggplot(df_total_mono, aes(x=Timepoint, y=mean_conc)) +
+  geom_point(aes(x=Timepoint, y=final_concentration, col=as.character(Trial))) +
+  geom_line() +
+  geom_errorbar(aes(x=Timepoint, ymin=mean_conc-std_conc, ymax=mean_conc+std_conc)) +
+  facet_grid_paginate(AA~Sample, scales="free_y", nrow=6,ncol=3, page=1, labeller = labeller(Sample=labs)) +
+  theme_publish() + scale_color_discrete(name="Replicate ID") +
+  ylab(expression(paste("Concentration(",mu,"M)"))) + expand_limits(y=0) +
+  theme(strip.text.x = element_text(angle=0, size=10, face="italic", vjust=0.2))
+
+plot_AA_mono_1
+
+```
+
+```{r aminoacidsfig1B, echo=FALSE, message=FALSE, warning=FALSE, fig.height= 10, fig.margin=TRUE, out.width=params$out_width, fig.cap = "Amino acid profiles during lupin quark production" }
+plot_AA_mono_2 <- ggplot(df_total_mono, aes(x=Timepoint, y=mean_conc)) +
+  geom_point(aes(x=Timepoint, y=final_concentration, col=as.character(Trial))) +
+  geom_line() +
+  geom_errorbar(aes(x=Timepoint, ymin=mean_conc-std_conc, ymax=mean_conc+std_conc)) +
+  facet_grid_paginate(AA~Sample, scales="free_y", nrow=6, ncol=3, page=2, labeller = labeller(Sample=labs)) +
+  theme_publish() + scale_color_discrete(name="Replicate ID") +
+  ylab(expression(paste("Concentration(",mu,"M)"))) + expand_limits(y=0) +
+  theme(strip.text.x = element_text(angle=0, size=10, face="italic", vjust=0.2))
+
+plot_AA_mono_2
+```
+
+
+```{r aminoacidsfig1C, echo=FALSE, message=FALSE, warning=FALSE, fig.height= 10, fig.margin=TRUE, out.width=params$out_width, fig.cap ="Amino acid profiles during lupin quark production" }
+plot_AA_mono_3 <- ggplot(df_total_mono, aes(x=Timepoint, y=mean_conc)) +
+  geom_point(aes(x=Timepoint, y=final_concentration, col=as.character(Trial))) +
+  geom_line() +
+  geom_errorbar(aes(x=Timepoint, ymin=mean_conc-std_conc, ymax=mean_conc+std_conc)) +
+  facet_grid_paginate(AA~Sample, scales="free_y", nrow=6, ncol=3, page=3, labeller = labeller(Sample=labs)) +
+  theme_publish() + scale_color_discrete(name="Replicate ID") +
+  ylab(expression(paste("Concentration(",mu,"M)"))) + expand_limits(y=0) +
+  theme(strip.text.x = element_text(angle=0, size=10, face="italic", vjust=0.2))
+
+plot_AA_mono_3
+```
+
+Supplementary material for @dank2021cross is available online at: https://doi.org/10.1016/j.lwt.2021.111041
+
+

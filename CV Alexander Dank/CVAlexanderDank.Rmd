@@ -1,0 +1,144 @@
+---
+header_includes:
+  -usepackage{xcolor}
+title: "Alexander Dank <br> Curriculum vitae"
+output:
+  pagedown::html_paged:
+    css: ["css/bootstrap-5.2.1.min.css", "css/two-col-cv.css"]
+    number_sections: false
+knit: pagedown::chrome_print
+bibliography: [bibliography/publications.bib]
+suppress-bibliography: TRUE
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(tidyverse)
+library(knitr)
+library(glue)
+library(fontawesome)
+library(readxl)
+library(pagedownCV)
+library(ggplot2)
+library(png)
+# read in CV data from e.g. an Excel spreadsheet --- the sample CV data is from this google sheet https://docs.google.com/spreadsheets/d/1ta71CAGkcLqm-W1UdVRA_JJSddWV2TsrRZsCnQlmOis/edit?usp=sharing
+cv_entries <- read_excel("cv_data_Alex.xlsx")
+#publications <- read_excel("cv_data.xlsx", sheet = "publications")
+```
+
+
+::: {.row}
+
+:::::: {.col-8 .summary}
+
+# Over mij
+**Persoonlijke Achtergrond**--- Geboren 14 Maart 1994 in Sprang-Capelle. BSc, MSc en PhD in Food Biotechnology aan de Wageningen Universiteit. Erasmus uitwisselingen naar KU Leuven en internship bij Arla Foods (Aarhus, Denemarken). Woonachtig in Katwijk aan Zee, getrouwd en 2 kinderen. Hobbies: Wielrennen, krachtsport en coderen.
+
+**Persoonlijke drive**--- Mijn passie voor data is tijdens mijn PhD project geboren; het analyseren van grote datasets, ontrafelen van (biologisch relevante) patronen en visualiseren van ons werk kon niet zonder programmeren. Gedreven door curiositeit en met het oog op transparant rapporteren heb ik ervaring opgedaan in verschillende codeertalen (R, Python, LaTeX, Rmarkdown, R shiny Apps). Zelfs mijn dissertatie (en deze CV) is compleet in Rmarkdown geschreven! Ik kan niet wachten op mijn volgende data uitdaging. 
+::::::
+
+:::::: {.col-4}
+
+# Contact {.box}
+
+::::::::::::: {.info-box}
+
+| Center | Left |
+|:------:|:-------|
+| `r fa("envelope")`|Alexander.dank@outlook.com
+| `r fa("phone")`|+31616165612
+| `r fa("linkedin")`|[Alexander Dank](https://www.linkedin.com/in/alexander-dank)
+| `r fa("house")`|Tijmstraat 18, 2225 RK, Katwijk
+
+:::::::::
+<img src="https://github.com/alexdank/pics/blob/main/FHM%20foto.jpg?raw=true"  width="35%" height="35%">
+::::::
+
+:::
+
+::: {.row}
+
+:::::: {.col-6 .left}
+
+# Werkervaring
+```{r}
+cv_entries |> 
+  filter(type %in% c('werkervaring',"nevenwerkzaamheden")) |> 
+  mutate(what = glue("<span class='cv-entry-title'>{what}</span>, {institution}")) |> 
+  select(year, what) |> 
+  kable()
+```
+
+# Codeertalen
+
+```{r, fig.width=3.5, fig.height=1.25}
+# Make a dummy df with relative knowledge
+taal <- c("R", "Rmarkdown", "R Shiny", "LaTeX", "Python")
+skill <- c(80, 75, 70, 20, 15)
+coding <- as.data.frame(cbind(taal, skill))
+
+
+## basic plot
+p <- coding %>% ggplot(aes(x=taal, y = skill, fill=taal)) + 
+  geom_col() + 
+  theme_classic() + coord_flip() + 
+  theme(legend.position = "none",
+        axis.line.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.ticks.y = element_blank(),
+        plot.margin = unit(c(0, 0, 0, -0.5), "cm")) +
+  scale_y_discrete(labels = NULL, breaks = NULL) +
+  scale_x_discrete(labels = NULL, limits = taal) +
+  xlab("") +
+  ylab("Ervaring")+
+  theme(axis.line.x = element_line(arrow = arrow(type='closed', length = unit(8,'pt'))))
+
+p <- p +geom_text(aes(label = taal, fontface='bold'), nudge_y= -0.6, size=2.5)
+
+p
+```
+
+* <img src="https://www.pngkey.com/png/full/139-1398300_r-shiny-logo.png"  width="10%" height="10%"> [<span style="color: blue">Shiny web app development voorbeeld</span>](https://foodmicrobiologywur.shinyapps.io/Hazards_shiny/)
+* <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png"  width="10%" height="10%"> [<span style="color: blue">Code voorbeelden</span>](https://github.com/alexanderdank)
+* <img src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/hq30ze9287y9ztkmcdhy"  width="10%" height="3%"> [<span style="color: blue">Lijst van gevolgde cursussen</span>](https://docs.google.com/spreadsheets/d/e/2PACX-1vRPu82jrnjNelp5ULiIUjkNw7CdW9zowWb5H--ytSvSrbwEWk47HoAdDpCG3Pam9An62kh5uE8Xx73q/pubhtml)
+
+
+
+# Wetenschappelijke publicaties
+* [<span style="color: blue">@dank2018crispr</span>](https://link.springer.com/article/10.1186/s13104-018-3788-5)
+* [<span style="color: blue">@dank2021cross</span>](https://www.sciencedirect.com/science/article/abs/pii/S0023643821001948)
+* [<span style="color: blue">@dank2021bacterial</span>](https://www.frontiersin.org/articles/10.3389/fmicb.2021.679827/full)
+* [<span style="color: blue">@dank2021propionibacterium</span>](https://ami-journals.onlinelibrary.wiley.com/doi/full/10.1111/1462-2920.15532)
+* [<span style="color: blue">@zeng2022bacterial</span>](https://www.sciencedirect.com/science/article/abs/pii/S2214799321001570)
+* PhD thesis --- *Propionibacterium freudenreichii*, more than meets the 'eyes'
+
+::::::
+
+:::::: {.col-6 .right}
+
+# Opleiding
+
+```{r}
+cv_entries |> 
+  filter(type == 'opleiding') |> 
+  mutate(what = glue("<span class='cv-entry-title'>{what}</span>, {where}")) |> 
+  select(year, what) |> 
+  kable() 
+```
+
+# Presentaties en conferenties
+
+```{r}
+cv_entries |> 
+  filter(type %in% c("conferentie","presentatie")) |> 
+  mutate(what = glue("<span class='cv-entry-title'>{what}</span>, {institution}")) |> 
+  select(year, what) |> 
+  kable() 
+```
+
+
+::::::
+
+:::
+

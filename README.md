@@ -1,4 +1,4 @@
-# RvIG_sollicitatie
+# RvIG sollicitatie
 
 Deze respository is gemaakt speciaal voor de sollicitatie voor Data Analist bij de Rijksdienst voor Identiteitsgegevens (RvIG).
 De folder bevat verschillende types materiaal: 
